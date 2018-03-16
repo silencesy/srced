@@ -19,6 +19,7 @@
 		if (flag == 0) {
 			$('.one').show();
 		} else if (flag == 1) {
+			$('.mui-icon.icon-kefu').hide();
 			$('.one').show();
 			$('.two').show();
 			$('.three').show();
@@ -75,9 +76,9 @@
 			} else {
 				localStorage.setItem('token',data.data.token);
 				var address = data.data.order.address;
-				var param = data.data.order.merchant.[0].param;
-                var scriptInsert = "<script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId="+ param +"&autoShow=false&language=ZHCN' async='async'></script>";
-                $("body").append($(scriptInsert));
+				var param = data.data.order.merchant[0].param;
+	            var scriptInsert = "<script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId="+ param +"&autoShow=false&language=ZHCN' async='async'></script>";
+	            $("body").append($(scriptInsert));
 				// 地址、邮箱
 				if (content_status == 1) {
 					var emaiHtml = template('emailtemplate', address);
