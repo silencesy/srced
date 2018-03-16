@@ -8,43 +8,46 @@
 		var showUserPickerButton = document.getElementById('showUserPicker');
 		var userResult = document.getElementById('userResult');				
 		//三级联动
-		var cityPicker3 = new mui.PopPicker({
-			layer: 3
-		});
-		cityPicker3.setData(cityData3);
-		var showCityPickerButton = document.getElementById('showCityPicker3');
-		var cityResult3 = document.getElementById('cityResult3');
-		showCityPickerButton.addEventListener('tap', function(event) {
-			cityPicker3.show(function(items) {
-				cityResult3.value = _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+		// var cityPicker3 = new mui.PopPicker({
+		// 	layer: 3
+		// });
+		// cityPicker3.setData(cityData3);
+		// var showCityPickerButton = document.getElementById('showCityPicker3');
+		// var cityResult3 = document.getElementById('cityResult3');
+		// showCityPickerButton.addEventListener('tap', function(event) {
+		// 	cityPicker3.show(function(items) {
+		// 		cityResult3.value = _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
 				//返回 false 可以阻止选择框的关闭
 				//return false;
-			});
-			$('input').blur();
-		}, false);
+		// 	});
+		// 	$('input').blur();
+		// }, false);
 		//输入框校验开始
 		var subto = document.getElementById('subto');
 		subto.addEventListener('tap',function() {
 			var tel = /^1[34578]\d{9}$/;
 			var name = document.getElementById('name').value;
 			var theNumber = document.getElementById('number').value;
-			var cityResult3 = document.getElementById('cityResult3').value;
-			var theTextarea = document.getElementById('textarea').value;
+			// var cityResult3 = document.getElementById('cityResult3').value;
+			var theTextareaC = document.getElementById('textareaC').value;
+			var theTextareaE = document.getElementById('textareaE').value;
 			var checkDeafultFlag = ($('#checkDeafult').is(':checked') == false)?0:1;
 			console.log(checkDeafultFlag);
 
-			console.log(name,theNumber,cityResult3,theTextarea)
+			// console.log(name,theNumber,cityResult3,theTextarea)
 			if(name == '') {
 				mui.toast('Please enter your name!');
 				return false
 			}else if(!tel.test(theNumber)) {
 					mui.toast('Please enter a 11-digit vaild number!');
 				return false
-			}else if(cityResult3 == '') {
-				mui.toast('Please select your region!');
-				return false
-			}else if(theTextarea == '') {		
-				mui.toast('Please write down your detailed address!');
+			}
+			// else if(cityResult3 == '') {
+			// 	mui.toast('Please select your region!');
+			// 	return false
+			// }
+			else if(theTextareaC == '') {		
+				mui.toast('Please write down your detailed address in Chinese!');
 				return false
 			}
 			
@@ -58,8 +61,9 @@
 				data: {
 					fullname: name,
 					phone: theNumber,
-					region: cityResult3,
-					region_detail: theTextarea,
+					// region: cityResult3,
+					region: theTextareaC,
+					region_detail: theTextareaE,
 					is_default: checkDeafultFlag
 
 				}

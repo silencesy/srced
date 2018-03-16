@@ -62,7 +62,7 @@
 			mui.toast("Please enter your password!");
 			return false;
 		} else if (!reg.test(password)) {
-			mui.toast("请输入正确的密码！");
+			mui.toast("Please enter your password with 6-16 digits (must contain numbers and letters)!");
 			return false;
 		}
 		$.ajax({
