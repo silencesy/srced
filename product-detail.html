@@ -311,7 +311,7 @@
 		<script id="productCarousel" type="text/html">
 		    {{each productCarouselList as val}}
 		    	<div class="swiper-slide">
-		    		<img class="lazy" data-original="{{val}}" data-preview-src="{{val}}" data-preview-group="1" alt="">
+		    		<img class="lazy" src="{{val}}" data-preview-src="{{val}}" data-preview-group="1" alt="">
 		    	</div>
 		    {{/each}}
 		</script>
@@ -322,7 +322,13 @@
 	    	{{if min_sale_price}}
 			<p class="price">¥{{min_sale_price}}-{{max_sale_price}} <del>￥{{min_price}}-{{max_price}}</del></p>
 			{{else}}
-			<p class="price">￥{{min_price}}-{{max_price}}</p>
+			<p class="price">
+				{{if min_price == min_price}}
+				￥{{min_price}}
+				{{else}}
+				￥{{min_price}}-{{min_price}}
+				{{/if}}
+			</p>
 			{{/if}}
 			<p class="clearfix" style="color: #666; font-size: 16px;">
 				* The product ships in Mainland China only, overseas parcel requests an extra shipping fee.
