@@ -48,7 +48,6 @@
         } else { 
             window.location.href = './payment-method2.html?orderid='+orderid;
         } 
-        
 	});
 	$('body').on('click', '.gorunfundbtn', function(event) {
 		var flagid = $(this).attr('flagid');
