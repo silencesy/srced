@@ -193,8 +193,8 @@
         if(pas1 == '') {
             mui.toast("Please enter your original password!");
         }  else if (!reg.test($("#pas2").val())){
-            mui.toast("Please enter your password with 6-16 digits (must contain numbers and letters)!");
-            $("#pas2").focus();
+            mui.toast("The new password with 6-16 digits (numbers and letters)!");
+            // $("#pas2").focus();
         } else {
             var token = localStorage.getItem("token");
             $.ajax({

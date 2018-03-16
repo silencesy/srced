@@ -3075,7 +3075,7 @@ del {
 .info-popup {
     position: absolute;
     z-index: 10000;
-    top: 50%;
+    top: 53%;
     left: 50%;
     display: none;
     overflow: hidden;
@@ -3181,7 +3181,7 @@ del {
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #666;
+    color: #f6442b;
     background: rgba(255,255,255,.95);
     -webkit-box-flex: 1;
 }
@@ -4656,6 +4656,38 @@ p img {
     .layout {
     	padding-bottom: 32px;
     }
+    .invoice-btn {
+		bottom: 32px;
+    }
+	.comments-btn.address-btn {
+		bottom: 32px;
+	}
+	.layout-login .mui-bar.mui-bar-tab {
+		padding-bottom: 32px;
+	}
+    .layout.personal-layout .mui-bar.mui-bar-tab {
+		padding-bottom: 32px;
+	}
+	.mui-bar-footer.no-address {
+		bottom: 32px;
+	}
+	.mui-comment-bottom {
+		padding-bottom: 32px;
+	}
+	.shop-bottom-banner {
+		padding-bottom: 32px;
+	}
+	.layout.home-layout .mui-bar.mui-bar-tab {
+		padding-bottom: 32px;
+	}
+	.shop-bottom-banner {
+    	padding-bottom: 82px;
+	}
+	.comments-page-layout .comments-btn {
+		bottom: 32px;
+	}
+
+
 
 }
 
