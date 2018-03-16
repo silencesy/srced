@@ -70,8 +70,14 @@
 		}else{  
 		    if(prevLink.indexOf(webAddr)==-1){    //来自其它站点  
 		        location.href = webAddr;  
-		    }    
-		    location.href = prevLink;  
+		    } else if (prevLink == 'http://mob.thmart.com.cn/reset-password.html') {
+		    	location.href = 'http://mob.thmart.com.cn';
+		    } else if (prevLink == 'http://proj9.thatsmags.com/reset-password.html') {
+		    	location.href = 'http://proj9.thatsmags.com';
+		    } else{
+		    	location.href = prevLink;
+		    }
+		      
 		}
 	}
 	//微信登录跳回原来的页面
