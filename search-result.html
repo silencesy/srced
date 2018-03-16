@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_79mnnve1zu102j4i.css">
+</head>
+<body>
+	<div class="layout home-layout">
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left shop-search-left"></a>
+			<div class="shop-search-input">
+				<form id="searchShopForm" onsubmit="return false;" action="##">
+					<input class="search-input" type="search" placeholder="Search" id="selfShopSearch" />
+					<i class="iconfont icon-sousuo"></i>
+				</form>
+			</div>
+		</header>
+		<div id="pullrefresh" class="merchants-list search-merchants-list mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div id="listdata">
+					<!-- <div class="shop-lists" >
+						<div class="title clearfix">
+							<div class="logo">
+								<img src="./static/images/shop-logo.jpg" alt="">
+							</div>
+							<div class="text">
+								<p>Bluewater shops name</p>
+							</div>
+							<a href="#" class="enter">Enter</a>
+						</div>
+						<div class="content clearfix">
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro001.png" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro002.jpg" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro003.jpg" alt="">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="shop-lists" >
+						<div class="title clearfix">
+							<div class="logo">
+								<img src="./static/images/shop-logo.jpg" alt="">
+							</div>
+							<div class="text">
+								<p>Bluewater shops name</p>
+							</div>
+							<a href="#" class="enter">Enter</a>
+						</div>
+						<div class="content clearfix">
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro001.png" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro002.jpg" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro003.jpg" alt="">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="shop-lists" >
+						<div class="title clearfix">
+							<div class="logo">
+								<img src="./static/images/shop-logo.jpg" alt="">
+							</div>
+							<div class="text">
+								<p>Bluewater shops name</p>
+							</div>
+							<a href="#" class="enter">Enter</a>
+						</div>
+						<div class="content clearfix">
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro001.png" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro002.jpg" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro003.jpg" alt="">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="shop-lists" >
+						<div class="title clearfix">
+							<div class="logo">
+								<img src="./static/images/shop-logo.jpg" alt="">
+							</div>
+							<div class="text">
+								<p>Bluewater shops name</p>
+							</div>
+							<a href="#" class="enter">Enter</a>
+						</div>
+						<div class="content clearfix">
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro001.png" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro002.jpg" alt="">
+								</a>
+							</div>
+							<div class="col4">
+								<a href="#">
+									<img src="./static/images/shop-pro003.jpg" alt="">
+								</a>
+							</div>
+						</div>
+					</div> -->
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 推荐商户 -->
+	<script id="shops" type="text/html">
+	    {{each shopsList as val}}
+	    	<div class="shop-lists" >
+				<div class="title clearfix">
+					<div class="logo">
+						<img class="lazy" data-original="{{val.coverpic}}" alt="">
+					</div>
+					<div class="text">
+						<p>{{val.merchant_name}}</p>
+					</div>
+					<a href="./shopOwner-home.html?merchantsid={{val.id}}" class="enter">Enter</a>
+				</div>
+				<div class="content clearfix">
+					{{each val.images as val2}}
+						<div class="col4">
+							<a href="./product-detail.html?productid={{val2.set_id}}">
+								<img class="lazy"  data-original="{{val2.set_img}}" alt="">
+							</a>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./api/searchResult.js"></script>
+</body>
+</html>

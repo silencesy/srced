@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Featured goods</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_b86z5o3kc56zuxr.css">
+</head>
+<body>
+	<div class="layout search-result-layout">
+		
+		<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+			<div class="wrapper-result mui-scroll">
+				<ul class="wall wall-content" id="listdata">
+					<!-- <li class="waterfall">
+						<a href="./cart-empty.html">
+							<img class="lazy" src="./static/images/yashilandai.jpg" />
+							<p>Shanghai Restaurant Review: Kun Thai Shanghai Restaurant Review: Kun Thai</p>
+							<span class="water-left">￥<span class="postage-number">113928</span></span>
+							<span class="iconfont icon-gouwuche water-right"></span>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>	
+	</div>
+
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<!-- <script src="./static/js/jquery.lazyload.min.js"></script> -->
+	<script src="./static/js/masonry.pkgd.min.js"></script>
+	<script src="./static/js/imagesloaded.pkgd.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script id="categorys" type="text/html">
+	    {{each categorysList as val}}
+	    	<li class="waterfall">
+				<a href="product-detail.html?productid={{val.set_id}}">
+					<img class="lazy" src="{{val.set_img}}" />
+					<p>{{val.goods_name}}</p>
+				</a>
+				{{if val.goods_sale_price}}
+				<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
+				{{else}}
+				<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
+				{{/if}}
+				<span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span>
+				
+			</li>
+	    {{/each}}
+	</script>
+	<script>
+		(function(mui) {
+			var sort;
+			var $grid = $('.wall-content').masonry({
+				itemSelector: '.waterfall',
+				percentPosition: true
+			});
+			mui('body').on('tap','a',function(){document.location.href=this.href;});
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						auto:true,
+						contentrefresh : "Loading…",
+						callback: pullupRefresh
+					}
+				}
+			});
+			var page = 0;
+			function pullupRefresh() {
+				++page;
+				$.ajax({
+					url: csOrzs + '/Api/Set/getList',
+					type: 'GET',
+					data: {
+                            'set_position': 4,
+                            'p': page,
+                            'pageSize': '8',
+                            'sort': sort
+                        },
+				})
+				.done(function(response) {
+					console.log(response);
+                    if (response.code == 1) {
+                    	var categoryData = response;
+	                	var totalPages = categoryData.data.totalPages;
+                    	var dataList = categoryData.data.goods;
+                    	mui('#pullrefresh').pullRefresh().endPullupToRefresh((page == totalPages));
+						var categorysList2 = {"categorysList":dataList};
+						var categorysHtml = template('categorys', categorysList2);
+                        var dataHtml = $(categorysHtml);
+					  	$grid.append( dataHtml ).masonry( 'appended', dataHtml );
+						$grid.imagesLoaded().progress( function() {
+					  		$grid.masonry();
+						});  
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						mui.toast("Network error, please try again!");
+					}
+					
+				})
+				.fail(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+					mui.toast("Network error, please try again!");
+				});
+			}
+		})(mui);
+	</script>
+</body>
+</html>

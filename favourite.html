@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Wishlist</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+</head>
+<body>
+	<div class="layout favourite-layout">
+		<!-- <header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">My Favourite</h1>
+		</header> -->
+		<div class="mui-content mui-favourite-content">
+		    <div class="table-card">
+		        <ul class="tab-btn">
+		           <li class="tab-active">goods</li>
+		           <li>Shops</li>
+		        </ul>
+		        <div class="tab-con">
+		            <div class="tab-on products tab-container">
+		                <ul class="save-pro-ul" id="goodsList">
+							<!-- <li class="save-pro-list clearfix">
+								<div class="save-pro-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="save-pro-info">
+									<p>123123123123123123123123312312312312312312312312312312312312312312312312123123123123123123123123</p>
+									<div class="save-info-group clearfix">
+										<span class="price">￥499</span>
+										<span class="delete-btn">Delete</span>
+									</div>
+								</div>
+							</li> -->
+		                </ul>
+		            </div>
+
+		            <div class="shops tab-container">
+		                <ul id="shopList">
+			                <!-- <li class="shops-list">
+								<div class="shops-left">
+									<img src="./static/images/blue.png" alt="">
+									<span>Bluewater</span>
+								</div>
+								<p class="shops-right shopsDelete">Delete</p>			
+							</li>	 -->		
+		                </ul>
+		            </div>
+
+		        </div>
+		    </div>
+		</div>
+	</div>
+
+	<!-- 收藏商品列表 -->
+	<script id="favouriteTemplate" type='text/html'>
+		{{each favouriteList as val index}}
+			<li class="save-pro-list clearfix" goodsid = {{val.id}}>
+				<div class="save-pro-img">
+					<a href="./product-detail.html?productid={{val.id}}">
+						<img class="lazy" data-original="{{val.coverpic}}" alt="">
+					</a>
+				</div>
+				<div class="save-pro-info">
+					<a href="./product-detail.html?productid={{val.id}}">
+						<p>{{val.goods_name}}</p>
+					</a>
+					<div class="save-info-group clearfix">
+						{{if val.goods_sale_price}}
+						<span class="price">￥{{val.goods_sale_price}}</span><del>￥{{val.goods_price}}</del>
+						{{else}}
+						<span class="price">￥{{val.goods_price}}</span>
+						{{/if}}
+						<span class="delete-btn">Delete</span>
+					</div>
+				</div>
+			</li>
+		{{/each}}
+	</script>
+
+	<script id="favouriteTemplate2" type='text/html'>
+		{{each favouriteList as val index}}
+			<li class="shops-list" shopid={{val.id}}>
+				<a href="./shopOwner-home.html?merchantsid={{val.id}}">
+					<div class="shops-left">
+						<img class="lazy" data-original="{{val.coverpic}}" alt="">
+						<span>{{val.merchant_name}}</span>
+					</div>
+				</a>
+				<p class="shops-right shopsDelete">Delete</p>			
+			</li>	
+		{{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./api/favourite.js"></script>
+</body>
+</html>

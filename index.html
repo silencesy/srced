@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="has-bottombar">
+<head>
+	<meta charset="UTF-8">
+	<title>ThMart</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=no,viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/swiper.min.css" />
+	<link rel="stylesheet" type="text/css" href="./static/css/mui.picker.all.css"/>
+	<link rel="stylesheet" type="text/css" href="./static/css/mui.poppicker.css"/>
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_ousndy8ej1exw29.css">
+</head>
+<body>
+	<div class="layer-box">
+		<i class="loading-icon loading-rotate"></i>
+	</div>
+	<div class="layout home-layout loading" style="visibility: hidden;" id="homePageShow">
+			<nav class="mui-bar mui-bar-tab" id="bottomBar">
+				<a class="mui-tab-item mui-active" id="homePage">
+					<span class="mui-icon iconfont icon-shanghu1"></span>
+					<span class="mui-tab-label">Home</span>
+				</a>
+				<a class="mui-tab-item" id="carPage">
+					<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+					<span class="mui-tab-label">Cart</span>
+				</a>
+				<a class="mui-tab-item" id="mePage">
+					<span class="mui-icon iconfont icon-me"></span>
+					<span class="mui-tab-label">Me</span>
+				</a>
+				<a class="mui-tab-item" id="morePage">
+					<span class="mui-icon iconfont icon-iconfonthome"></span>
+					<span class="mui-tab-label">More</span>
+				</a>
+			</nav>
+			<div class="home-search-group">
+				<div class="clearfix">
+					<span id='showUserPicker'>All <i class="fr iconfont icon-xiangshangjiantou-copy-copy-copy"></i></span>
+					<form id="homeSearch" onsubmit="return false;" action="##">
+						<input id="searchInput" class="searchInput" type="search" placeholder="Search"/>
+						<i class="iconfont icon-sousuo"></i>
+					</form>
+				</div>
+			</div>
+			<div id="searchBg" class="search-bg"></div>
+			<span id="backBtn" class="iconfont icon-fanhuidingbu"></span>
+			<div class="mui-content">
+				<!-- 首页轮播开始 -->
+				<div class="home-carousel" id="homeCarouselBox">
+				 	<div class="swiper-container home-banner-carousel">
+				        <div class="swiper-wrapper" id="homeBannerbox">
+				            <!-- <div class="swiper-slide"><a href="./product-detail.html"><img  src="./static/images/lb.jpg" alt=""></a></div>
+				            <div class="swiper-slide"><a href="#"><img  src="./static/images/lb.jpg" alt=""></a></div>
+				            <div class="swiper-slide"><a href="#"><img  src="./static/images/lb.jpg" alt=""></a></div>
+				            <div class="swiper-slide"><a href="#"><img  src="./static/images/lb.jpg" alt=""></a></div> -->
+			    		</div>
+		    			<div class="swiper-pagination"></div>
+					</div>
+				<!-- 首页轮播结束 -->
+				<div class="home-section-box">
+					<div class="section-head section-head-one">
+						<span class="section-head-text">Featured shops</span>
+						<div class="home-line"></div>
+						<a href="./shop-list.html" class="home-more">More</a> 
+					</div>
+					<div class="home-product-carousel-box">
+						<div class="swiper-container home-product-carousel home-product-carousel1">
+					        <div class="swiper-wrapper" id="merchantsBox">
+					            <!-- <div class="swiper-slide product-lists">
+					            		<a href="./shopOwner-home.html">
+					            			<img class="lazy" data-original="./static/images/products.jpg" alt="" />
+										<p>adidas</p>
+					            		</a>
+					            </div> -->
+					        </div>
+					        <!-- Add Pagination -->
+					        <div class="swiper-scrollbar"></div>
+					    </div>
+					</div>
+				</div>
+				<div class="home-ad" id="homeId1">
+					
+				</div>
+				<div class="home-section-box">
+					<div class="section-head">
+						<span class="section-head-text">Featured goods</span>
+						<div class="home-line home-line-two"></div>
+						<a href="./Re-products-list.html" class="home-more">More</a>
+					</div>
+					<div class="home-product-carousel-box home-product-carousel-box2">
+						<div class="swiper-container home-product-carousel home-product-carousel2">
+					        <div class="swiper-wrapper" id="productBox">
+					            <!-- <div class="swiper-slide product-lists">
+					            		<a href="./product-detail.html">
+					            			<img class="lazy" data-original="./static/images/products.jpg" alt="" />
+											<p>adidasadidasaddidasadidasaddidasadidasaddidasadidasaddidasadidasadidasadidasadidasadidasadidas</p>
+											<p>￥430.50</p>
+											<p>￥349.50</p>
+					            		</a>
+					            </div> -->
+					        </div>
+					        <!-- Add Pagination -->
+					        <div class="swiper-scrollbar"></div>
+					    </div>
+					</div>
+				</div>
+				<div class="home-ad" id="homeId2">
+					
+				</div>
+				<div class="home-section-box">
+					<div class="section-head">
+						<span class="section-head-text">Editor’s pick</span>
+						<div class="home-line home-line-three"></div>
+						<a href="./article-list.html" class="home-more">More</a>
+					</div>
+					<ul class="mui-table-view home-pick-list" id="articleBox">
+						<!-- <a href="article-details.html">
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img class="list-li-img lazy" data-original="./static/images/home-product1.jpg">
+								</div>
+								<div class="home-pick-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="date">2017-10-24</em>
+								</div>
+							</li>
+						</a> -->		
+					</ul>
+				</div>
+				<div class="home-ad" id="homeId3">
+					
+				</div>
+				<div class="classification">
+					<ul class="mui-table-view" id="categoryBox">
+						<!-- <li class="mui-table-view-cell">
+							<a href="#">
+								<img class="lazy" data-original="./static/images/home-class1.jpg" alt="" />
+							</a>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 首页banner推荐 -->
+	<script id="homeBanner" type="text/html">
+	    {{each homeBannerList as val}}
+	    	<div class="swiper-slide">
+	    		{{if val.set_cat_id == 2}}
+	    		<a href="./shopOwner-home.html?merchantsid={{val.set_id}}">
+	    			<img  src="{{val.set_img}}" alt="">
+	    		</a>
+				{{else if val.set_cat_id == 1}}
+	    		<a href="product-detail.html?productid={{val.set_id}}">
+	    			<img  src="{{val.set_img}}" alt="">
+	    		</a>
+	    		{{else}}
+	    		<a href="{{val.set_url}}">
+	    			<img  src="{{val.set_img}}" alt="">
+	    		</a>
+	    		{{/if}}
+	    	</div>
+	    {{/each}}
+	</script>
+ 
+	<!-- 推荐商户 -->
+	<script id="merchants" type="text/html">
+	    {{each merchantsList as val}}
+	    	<div class="swiper-slide product-lists">
+        		<a href="./shopOwner-home.html?merchantsid={{val.set_id}}">
+        			<img class="lazy" data-original="{{val.set_img}}" alt="" />
+					<p>{{val.merchant_name}}</p>
+        		</a>
+            </div>
+	    {{/each}}
+	</script>
+
+	<!-- 推荐商品模板 -->
+	<script id="products" type="text/html">
+	    {{each productList as val}}
+	    	<div class="swiper-slide product-lists">
+        		<a href="product-detail.html?productid={{val.set_id}}">
+        			<img class="lazy" data-original="{{val.set_img}}" alt="" />
+					<p>{{val.goods_name}}</p>
+					{{if val.goods_sale_price}}
+					<p>￥{{val.goods_price}}</p>
+					<p>￥{{val.goods_sale_price}}</p>
+					{{else}}
+					<p></p>
+					<p>￥{{val.goods_price}}</p>
+					{{/if}}
+        		</a>
+            </div>
+	    {{/each}}
+	</script>
+
+	<!-- 推荐文本模板 -->
+	<script id="articles" type="text/html">
+	    {{each articlesList as val}}
+	    	<a href="article-details.html?articlesid={{val.set_id}}">
+				<li class="mui-table-view-cell">
+					<div class="home-pick-img">
+						<img class="list-li-img lazy" data-original="{{val.set_img}}">
+					</div>
+					<div class="home-pick-info">
+						<p>{{val.article_name}}</p>
+						<em class="date">{{val.create_time}}</em>
+					</div>
+				</li>
+			</a>
+	    {{/each}}
+	</script>
+	<!-- 商品分类模板 -->
+	<!-- deals分类模板 -->
+	<script id="deals" type="text/html">
+    	<li class="mui-table-view-cell">
+			<a href="./product-list.html?categoryid={{set_id}}">
+				<img class="lazy" data-original="{{image}}" alt="" />
+			</a>
+		</li>
+	</script>
+	<!-- shoplist分类模板 -->
+	<script id="allMerchanttemplate" type="text/html">
+    	<li class="mui-table-view-cell">
+			<a href="search-result.html?searchdata=">
+				<img class="lazy" data-original="{{image}}" alt="" />
+			</a>
+		</li>
+	</script>
+	<!-- 商品分类模板 -->
+	<script id="categorys" type="text/html">
+	    {{each categoryList as val}}
+	    	<li class="mui-table-view-cell">
+				<a href="./all-categorys.html?categoryid={{val.set_id}}">
+					<img class="lazy" data-original="{{val.set_img}}" alt="" />
+				</a>
+			</li>
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/mui.picker.min.js"></script>
+	<script src="./static/js/mui.poppicker.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/swiper.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./api/isLogin.js"></script>
+	<script src="./api/homePage.js"></script>
+
+</body>
+</html>

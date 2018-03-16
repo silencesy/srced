@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>nested muiscroll</title>
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/minirefresh.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+        <!-- 字体图标 -->
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_jmbdwkgo4etdquxr.css">
+        <style>
+            .mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+                height: 50px;
+                line-height: 50px;
+                background-color: #fff;
+            }
+            .mui-fullscreen {
+                top: 0 !important;
+            }
+            .mui-fullscreen {
+                top: 45px;
+            }
+            
+            .minirefresh-wrap {
+                top: 0;
+            }
+            
+            #gallert-slider {
+                height: 220px;
+            }
+            .mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+                width: 100%;
+            }
+            .article_content .mui-scroll .mui-control-item {
+                width: 20%;
+                display: inline-block;
+                padding: 0;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+            }
+
+            .mui-slider-indicator.mui-segmented-control {
+                height: 50px; 
+                background-color: #fff;
+            }
+            .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+                    border-top: 1px solid #E8E8E8;
+            }
+            .article_slider_box .mui-control-content {
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="layout orders-layout">
+            <div class="mui-content article_content orders-content">
+                <div id="slider" class="mui-content mui-slider mui-fullscreen">
+                    <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                        <div class="mui-scroll">
+                            <a class="mui-control-item mui-active" href="#item0mobile">
+                                All
+                            </a>
+                            <a class="mui-control-item" href="#item1mobile">
+                                Unpaid
+                            </a>
+                            <a class="mui-control-item" href="#item2mobile">
+                                Paid
+                            </a>
+                            <a class="mui-control-item" href="#item3mobile">
+                                Deliverd
+                            </a>
+                            <a class="mui-control-item" href="#item4mobile">
+                                Reviews
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mui-slider-group article_slider_box">
+                        <div id="item0mobile" class="mui-slider-item mui-control-content mui-active">
+                            <div id="minirefresh0" class="minirefresh-wrap">
+                                <div class="minirefresh-scroll">
+                                    <ul class="data-list mui-table-view" id="listdata0">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="item1mobile" class="mui-slider-item mui-control-content">
+                            <div id="minirefresh1" class="minirefresh-wrap">
+                                <div class="minirefresh-scroll">
+                                    <ul class="data-list mui-table-view" id="listdata1">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="item2mobile" class="mui-slider-item mui-control-content">
+                            <div id="minirefresh2" class="minirefresh-wrap">
+                                <div class="minirefresh-scroll">
+                                    <ul class="data-list mui-table-view" id="listdata2">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="item3mobile" class="mui-slider-item mui-control-content">
+                            <div id="minirefresh3" class="minirefresh-wrap">
+                                <div class="minirefresh-scroll">
+                                    <ul class="data-list mui-table-view" id="listdata3">
+                                        <!-- <a href="article-details.html">
+                                            <li class="mui-table-view-cell">
+                                                <div class="home-pick-img">
+                                                    <img src="./static/images/home-product1.jpg" alt="">
+                                                </div>
+                                                <div class="home-pick-info">
+                                                    <p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+                                                    <em class="date">2017-10-24</em>
+                                                </div>
+                                            </li>
+                                        </a> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="item4mobile" class="mui-slider-item mui-control-content">
+                            <div id="minirefresh4" class="minirefresh-wrap">
+                                <div class="minirefresh-scroll">
+                                    <ul class="data-list mui-table-view" id="listdata4">
+                                        <!-- <a href="article-details.html">
+                                            <li class="mui-table-view-cell">
+                                                <div class="home-pick-img">
+                                                    <img src="./static/images/home-product1.jpg" alt="">
+                                                </div>
+                                                <div class="home-pick-info">
+                                                    <p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+                                                    <em class="date">2017-10-24</em>
+                                                </div>
+                                            </li>
+                                        </a> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/jquery.min.js"></script>
+        <script src="./static/js/minirefresh.js"></script>
+
+        <script>
+            (function(mui) {
+                var slider = mui("#slider");
+                slider.slider({
+                    interval: 0
+                });
+                var str1 = ``;
+                atricle(0);
+                atricle(1);
+                atricle(2);
+                atricle(3);
+                atricle(4);
+
+                function atricle(index) {
+                    // 初始化页码
+                    var page = 0;
+                    // miniRefresh 对象
+                    var miniRefresh = new MiniRefresh({
+                        container: '#minirefresh'+index,
+                        down: {
+                            isLock: true,
+                            callback: function() {
+                            }
+                        },
+                        up: {
+                            isAuto: true,
+                            callback: function() {
+                                // 递增页码
+                                page++;
+                                // console.log(0);
+                                $.ajax({
+                                    // 请求网址
+                                    url: 'data/listdata' + page + '.json',
+                                    type: 'GET',
+                                    // 请求参数，一般会带上页码
+                                    data: {
+                                        'page': page,
+                                        // 防止GET请求缓存
+                                        't': new Date().getTime(),
+                                    },
+                                    success: function(response) {
+                                        // 下面这段请根据自己的数据结构来处理
+                                        var arrLen = response.data.length;
+                                        if (arrLen > 0) {
+                                            var html = '';
+                                            $.each(response.data, function(key, value) {
+                                                html += `<div class="orders-list">
+                                                            <div class="title">
+                                                                Bluewater <span class="mui-icon mui-icon-arrowright"></span> <span class="status">The transaction closed</span>
+                                                            </div>
+                                                            <div class="product-info clearfix">
+                                                                <div class="clearfix">
+                                                                    <img src="./static/images/ordersimg.jpg" alt="">
+                                                                    <div class="pro-det-info clearfix">
+                                                                        <div class="text-info">
+                                                                            <p>Shanghai Restaurant Review: Kun Thai</p>
+                                                                            <p>Specifications: Blue</p>
+                                                                            <p>Size: L</p>
+                                                                        </div>
+                                                                        <div class="number-info">
+                                                                            <p>¥ 299</p>
+                                                                            <del>¥ 382</del>
+                                                                            <p>x 1</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="pro-bottom-info clearfix">
+                                                                    <p>Total: ¥ <span>304.00</span> (Shipping:¥<span>5.00</span>)</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>`
+                                                        ;
+                                            });
+                                            // console.log(html);
+                                            // $('#listdata1').append(html);
+                                            setTimeout(function() {
+                                                // DOM 插入数据(使用setTimeout函数是方便演示的)
+                                                $('#listdata'+ index).append(html);
+
+                                                // 是否已取完数据页
+                                                if (response.last_page == page) {
+                                                    miniRefresh.endUpLoading(true);
+                                                } else {
+                                                    miniRefresh.endUpLoading(false);
+                                                }
+                                            }, 600);
+                                        } else {
+                                            miniRefresh.endUpLoading(true);
+                                        }
+                                    },
+                                    error: function() {
+                                        miniRefresh.endUpLoading(true);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            })(mui);
+
+            
+            
+        </script>
+    </body>
+
+</html>

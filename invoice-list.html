@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>invoice-list</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xr4p95ezbeqgds4i.css">
+</head>
+<body>
+	<div class="layout comments-page-layout layout-addrlist">
+		<!-- <header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">invoice</h1>
+		</header> -->
+		<div class="mui-content mui-scroll-wrapper invoice-wrap" id="pullrefresh">
+			<div class="mui-scroll">
+				<div class="data-list" id="listdata">
+					<!-- <div class="add-list">
+						<p>孙宇</p>
+						<p>上海黄浦区</p>
+						<p>123456789123456789</p>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>Default address</label>
+							<input name="checkbox1" value="Item 1" type="radio">
+						</div>
+						<div class="edit-addr">
+					  		<span class="edit"><em class="mui-icon iconfont icon-bianji"></em>Edit</span>
+					  		<span class="delete"><em class="icon-shanchu mui-icon iconfont"></em>Delete</span>
+					  	</div>
+					</div> -->
+					
+				</div>
+			</div>
+		</div>
+		<a href="./invoice.html" class="comments-btn address-btn">Add a new invoice</a>
+	</div>
+	<script id='invoiceTemplate' type='text/html'>
+		{{each invoiceList as val inde}}
+			<div class="add-list">
+				<p>{{val.company_name}}</p>
+				<p>{{val.region}}</p>
+				<p>{{val.tax}}</p>
+				<div class="mui-input-row mui-radio mui-left">
+					<label>Default address</label>
+					{{if val.is_default == 1}}
+					<input name="checkbox1" value="Item 1" invoiceid ="{{val.id}}" checked="checked" type="radio">
+					{{else}}
+					<input name="checkbox1" value="Item 1" invoiceid ="{{val.id}}" type="radio">
+					{{/if}}
+					<!-- <input name="checkbox1" value="Item 1" type="radio"> -->
+				</div>
+				<div class="edit-addr">
+			  		<span class="edit" invoiceid ="{{val.id}}"><em class="mui-icon iconfont icon-bianji"></em>Edit</span>
+			  		<span class="delete" invoiceid ="{{val.id}}"><em class="icon-shanchu mui-icon iconfont"></em>Delete</span>
+			  	</div>
+			</div>
+		{{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./api/invoiceList.js"></script>
+</body>
+</html>

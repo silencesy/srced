@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>refound info</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/mui.picker.all.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+    </head>
+
+    <body>
+        <div class="layout refoundInfo-layout">
+            <header id="header" class="mui-bar mui-bar-nav">
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+                <h1 class="mui-title">Refund</h1>
+            </header>
+            <div class="mui-content refundContent mui-scroll-wrapper" id="refundcontaier">
+                <div class="mui-scroll">
+                    <div id="listdata">
+                        
+                    </div>
+                </div>
+                <!-- <div class="refund-li">
+                    <ul class="mui-table-view">
+                        <li class="mui-refund-list">
+                            <a class="mui-refund-products" href="">
+                                <img src="./static/images/ordersimg.jpg" alt="">
+                                <span>Shanghai Restaurant Review: Kun Thai</span>
+                            </a>               
+                        </li>
+                        <li class="mui-refund-money">
+                            <span>Refund Amount</span>
+                            <i>￥299</i>             
+                        </li>
+                    </ul> 
+                    <div class="Refunding">
+                        <p>Refunding</p>
+                        <span>Your refund will be returned back to your payment account in three working days once the shop onwer confirm.</span>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+        <script id ='refundTemplate' type='text/html'>
+            {{each refundlist as val i}}
+                {{if val.status == 0}}
+                <div class="refund-li">
+                    <ul class="mui-table-view">
+                        <li class="mui-refund-list">
+                            <a class="mui-refund-products" href="">
+                                <img src="{{val.goods_picture}}" alt="">
+                                <span>{{val.goods_name}}</span>
+                            </a>               
+                        </li>
+                        <li class="mui-refund-money">
+                            <span>Refund Amount</span>
+                            <i>￥{{val.total}}</i>             
+                        </li>
+                    </ul> 
+                    <div class="Refunding">
+                        <p>Refunding</p>
+                        <span>Your refund will be returned back to your payment account in three working days once the shop onwer confirm.</span>
+                    </div>
+                </div>
+                {{else}}
+                <div class="refund-li">
+                    <ul class="mui-table-view">
+                        <li class="mui-refund-list">
+                            <a class="mui-refund-products" href="">
+                                <img src="{{val.goods_picture}}" alt="">
+                                <span>{{val.goods_name}}</span>
+                            </a>               
+                        </li>
+                        <li class="mui-refund-money">
+                            <span>Refund Amount</span>
+                            <i>￥{{val.total}}</i>             
+                        </li>
+                    </ul> 
+                    <div class="Refunding">
+                        <p>Refunded</p>
+                        <span>123Your refund will be returned back to your payment account in three working days once the shop onwer confirm.</span>
+                    </div>
+                </div>
+                {{/if}}
+            {{/each}}
+        </script>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/template.js"></script>
+        <script src="./static/js/jquery.min.js"></script>
+        <script>
+            (function(mui) {
+                mui.init();
+                var token = localStorage.getItem("token",token);
+                getdata ();
+                var page = 0;
+                function getdata () {
+                    mui.init({
+                        pullRefresh: {
+                            container: '#refundcontaier',
+                            up: {
+                                auto:true,
+                                contentrefresh : "Loading…",
+                                callback: pullupRefresh
+                            }
+                        }
+                    });
+                }
+                function pullupRefresh() {
+                        ++page;
+                        $.ajax({
+                        // 请求网址
+                            beforeSend: function(request) {
+                                request.setRequestHeader("TOKEN", token);
+                            },
+                            url: csOrzs + '/Api/Order/refundList',
+                            type: 'get',
+                            data: {
+                                pageSize: 8,
+                                p: page,
+                            },
+                        })
+                        .done(function(data) {
+                            console.log(data);
+                            if (data.code == 1) {
+                                var refundlist = data.data.res;
+                                console.log(refundlist)
+                                var totalPages = data.data.totalPages;
+                                mui('#refundcontaier').pullRefresh().endPullupToRefresh((page == totalPages || totalPages ==0));
+                                var refundlist2 = {"refundlist":refundlist};
+                                var refundlistHtml = template('refundTemplate', refundlist2);
+                                $('#listdata').append(refundlistHtml);
+                                    
+                            } else {
+                                mui('#refundcontaier').pullRefresh().endPullupToRefresh(true);
+                                mui.toast("Network error, please try again!");
+                            }
+                            
+                        })
+                        .fail(function() {
+                            mui('#refundcontaier').pullRefresh().endPullupToRefresh(true);
+                            mui.toast("Network error, please try again!");
+                        });
+                   
+                }
+            })(mui);
+                
+
+                    
+                    
+                    
+
+
+        </script>
+    </body>
+</html>

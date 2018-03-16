@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Order Confirmation</title>
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<style>
+		#alipaybtn {
+			text-align: center;
+		}
+		#alipaybtn .alipay {
+		    float: none;
+		    width: 45%;
+		    display: inline-block;
+		    margin: 0 auto;
+		    background-position: center;
+		    background-size: 50% 50%;
+		    height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="pay-back"></a>
+			<h1 class="mui-title">Details</h1>
+		</header>
+		<div class="mui-content">
+			<p class="pay-amount">Amount: <em id="tatol"></em></p>
+			<div class="pay-box clearfix" id="alipaybtn">
+				<span class="alipay"></span>
+			</div>
+		</div>
+	</div>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script>
+		(function(mui) {
+			var orderid = getQueryString("orderid");
+			var trade_no2 = '';
+			var token = window.localStorage.getItem('token');
+			$.ajax({
+				beforeSend: function(request) {
+	                request.setRequestHeader("TOKEN", token);
+	            },
+				url: csOrzs + '/Api/Order/getTotal',
+				type: 'POST',
+				data: {
+						order_id: orderid
+					},
+			})
+			.done(function(data) {
+				console.log(data);
+				if (data.code == 1) {
+					trade_no2 = data.data.trade_no
+					window.localStorage.setItem('token',data.data.token);
+					$('#tatol').html('￥'+data.data.total);
+				}
+			})
+			.fail(function() {
+				console.log("error");
+			})
+
+			$('.alipay').on('click',function() {
+				window.location.href =  csOrzs + '/Api/Alipay/alipayapi?orderid=' + orderid;
+			});
+
+			// 弹出框
+		    var payBack = document.getElementById('pay-back');
+		    payBack.addEventListener('tap',function(){
+		        var btnArray = ['Yes', 'No'];
+		        mui.confirm('Are you sure to exit now?', ' ', btnArray, function(e) {
+		            if (e.index == 0) {
+		                window.location.href = './pay-result.html?orderid=' + orderid;
+		            }
+		        });
+		    });
+		    setInterval(function() {
+		    	console.log(trade_no2);
+			$.ajax({
+				url: csOrzs + "/Api/Alipay/orderQuery",
+				type: 'POST',
+				data: {'WIDout_trade_no': trade_no2},
+			})
+			.done(function(data) {
+				console.log(data);
+				if (data.code == 1) { //订单状态为1表示支付成功
+				  	window.location.href = './pay-result.html?orderid=' + orderid + '&success=1'; //页面跳转
+	            } 
+			})
+			.fail(function() {
+				mui.toast("Network error, please try again!");
+			});
+
+		}, 1000); 
+
+			// 获取地址栏参数
+		    function getQueryString(name) {
+		        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		            var r = window.location.search.substr(1).match(reg);
+		        if (r != null) {
+		            return unescape(r[2]);
+		        }
+		            return null;
+		    }
+
+		})(mui);
+	</script>
+</body>
+</html>

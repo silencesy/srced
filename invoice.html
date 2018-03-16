@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>invoice</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link href="./static/css/mui.picker.all.css" rel="stylesheet" />
+	<link href="./static/css/mui.poppicker.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+</head>
+<body>
+	<div class="layout layout-city invoice-layout">
+		<!-- <header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Invoice Info</h1>
+		</header> -->
+		<span id="subto" class="invoice-btn">Done</span>
+		<div class="mui-content addressContent">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<label>Company&nbsp;Name：</label>
+					<input type="text"  id="name" placeholder="" >
+				</div>				
+				<div class="mui-input-row">
+					<label>Company&nbsp;Address：</label>
+					<input type="text"  id="textarea" placeholder="" >
+				</div>	
+				<div class="mui-input-row">
+					<label>Tax&nbsp;Number：</label>
+					<input type="text"  id="number" placeholder="" >
+				</div>			
+			</div>
+			<div class="mui-input-row mui-checkbox mui-left setDefault">
+			  	<label>Set as Default</label>
+			  	<input name="checkbox1" value="Item 1" type="checkbox" id="checkDeafult">
+			</div> 
+		</div>
+		
+	</div>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./api/invoice.js"></script>
+</body>
+</html>

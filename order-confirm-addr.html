@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Order-confirm</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link href="./static/css/mui.picker.all.css" rel="stylesheet" />
+	<link href="./static/css/mui.poppicker.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_493593_17fvegvu6w7y14i.css">
+	<style>
+		#bigbox {
+			margin-top: 10px;
+		}
+
+		#addlist {
+			margin-top: 10px;
+			display: none;
+		}
+
+		#addAddr {
+			margin-top: 10px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<header id="header" class="mui-bar mui-bar-nav ">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Order</h1>
+		</header>
+		<div class="mui-content order-page-content">
+			<div id="bigbox">
+				
+			</div>
+			<div id="addlist">
+				
+			</div>
+			<div id="addAddr">
+				<span id="subto" class="invoice-btn">Submit</span>
+				<div class="mui-content addressContent">
+					<div class="mui-input-group" id="inputAdd">
+						<div class="mui-input-row">
+							<label>Full&nbsp;name：</label>
+							<input type="text"  id="name" placeholder="" >
+						</div>				
+						<div class="mui-input-row">
+							<label>Phone&nbsp;number：</label>
+							<input type="text"  id="number" placeholder="" >
+						</div>				
+						<!-- 三级联动开始 -->
+			    		<div id="showCityPicker3" class="mui-input-row">
+			    			<label class="region">Select&nbsp;region：</label>
+			    			<input type="" name="" id="cityResult3" value="" />
+			    			
+			    		</div>
+			    		<!-- 三级联动结束 -->
+			    		<textarea id="textarea" rows="5" placeholder="Please fill in the details"></textarea>
+					</div> 
+					<div class="mui-input-row mui-checkbox mui-left setDefault" id="defaultBtn">
+					  	<label>Set as Default</label>
+					  	<input id="checkDeafult" name="checkbox1" value="Item 1" type="checkbox">
+					</div>
+				</div>
+			</div>
+			<!-- <div class="order-addr">
+				<div class="select-address order-con">
+					<div class="order-add">
+						<p>Amanda</p>
+						<p>1365374988</p>
+						<span>Room 305-306,Building 2,No.169 MengZi Rode,Shanghai</span>
+					</div>
+					<a href="#addrList" class="change-add" id="changeAddBtn">Change Address</a>
+					<img src="./static/images/letter.jpg" alt="" class="letter">
+				</div>
+				<ul class="order-addr-ul">
+					<li class="order-addr-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							<div class="shop-name">
+								<span>shopname</span><i class="iconfont icon-arrowright"></i>
+							</div>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>
+							</li>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>								
+							</li>
+							<div class="postage-packing">
+								<span class="post-left">Postage&Packing</span>
+								<span class="post-right">￥<span class="postage-number">5.00</span></span>
+							</div>
+						</ul>
+					</li>
+					<li class="order-addr-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							<div class="shop-name">
+								<span>shopname</span><i class="iconfont icon-arrowright"></i>
+							</div>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>
+							</li>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>								
+							</li>
+							<div class="postage-packing">
+								<span class="post-left">Postage&Packing</span>
+								<span class="post-right">￥<span class="postage-number">5.00</span></span>
+							</div>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<footer class="footer-order">
+				<div class="total">Total:￥<span class="sumNumber"></span></div>
+				<div class="submit">Submit</div>
+			</footer> -->
+		</div>
+	</div>
+	<script id='addrTemplate' type="text/html">
+		<div class="order-addr">
+				<div class="select-address order-con">
+					{{ if address == null}}
+						<div class="order-add">
+							<p>Please add your detailed address.</p>
+						</div>
+						<a class="change-add" id="AddAddrBtn">Add Address</a>
+						{{else}}
+						
+						<div class="order-add" id="singleaddr">
+							<div id="setAddrId" addrid = {{address.id}}>
+								<p>{{address.fullname}}</p>
+								<p>{{address.phone}}</p>
+								<span>{{address.region}} {{address.region_detail}}</span>
+							</div>
+						</div>
+						<a class="change-add" id="changeAddBtn">Change Address</a>
+					{{/if}}
+					
+					
+					<img src="./static/images/letter.jpg" alt="" class="letter">
+				</div>
+				<ul class="order-email-ul">
+				{{each merchant as val index}}
+					{{if val.no_merchant == 1}}
+					<li class="order-email-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							{{each val.list as val2 index}}
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="{{val2.goods_picture}}" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>{{val2.goods_name}}</p>
+									<p>{{val2.goods_type_one}} {{val2.goods_type_two}}</p>
+									<em class="price">￥{{val2.goods_sale_price}} <del>￥{{val2.goods_price}}</del></em><em class="number">x{{val2.goods_cnt}}</em>
+								</div>
+							</li>
+							<div class="postage-packing">
+								<span class="post-left">Postage&Packing</span>
+								<span class="post-right">￥<span class="postage-number">{{val2.freight}}</span></span>
+							</div>
+							{{/each}}
+						</ul>
+					</li>
+					{{else}}
+					<li class="order-email-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							<div class="shop-name">
+								<span>{{val.merchant_name}}</span><i class="iconfont icon-arrowright"></i>
+							</div>
+							{{each val.list as val2 index}}
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="{{val2.goods_picture}}" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>{{val2.goods_name}}</p>
+									<p>{{val2.goods_type_one}} {{val2.goods_type_two}}</p>
+									<em class="price">
+										{{if val2.goods_sale_price}}
+										￥{{val2.goods_sale_price}}
+										<del>￥{{val2.goods_price}}</del>
+										{{else}}
+										￥{{val2.goods_price}}
+										{{/if}}
+									</em>
+									<em class="number">x{{val2.goods_cnt}}</em>
+								</div>
+							</li>
+							{{/each}}
+							<div class="postage-packing">
+								<span class="post-left">Postage&Packing</span>
+								<span class="post-right">￥<span class="postage-number">{{val.freight}}</span></span>
+							</div>
+						</ul>
+					</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+			</div>
+			<footer class="footer-order">
+				<div class="total">Total:￥<span class="sumNumber">{{total}}</span></div>
+				<div class="submit">Submit</div>
+			</footer>
+	</script>
+	<script id="addrListTemplate" type="text/html">
+		<ul class="mui-table-view">
+			{{each arrlistdata as val index}}
+				<li class="mui-table-view-cell" addrid="{{val.id}}">
+					<p>{{val.fullname}}</p>
+					<p>{{val.phone}}</p>
+					<p>{{val.region}} {{val.region_detail}}</p>
+				</li>
+			{{/each}}
+		</ul>
+		<span class='order-add-address'>Add address</span>
+	</script>
+	<script id="singleaddrTemplate" type="text/html">
+		<div id="setAddrId" addrid = {{id}}>
+			<p>{{fullname}}</p>
+			<p>{{phone}}</p>
+			<p>{{region}} {{region_detail}}</p>
+		</div>	
+	</script>
+	<script id="singleaddrTemplate2" type="text/html">
+		<div class="order-add" id="singleaddr">
+			<div id="setAddrId" addrid = {{id}}>
+				<p>{{fullname}}</p>
+				<p>{{phone}}</p>
+				<p>{{region}} {{region_detail}}</p>
+			</div>
+		</div>
+		<a class="change-add" id="changeAddBtn">Change Address</a>
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/mui.picker.min.js"></script>
+	<script src="./static/js/mui.poppicker.js"></script>
+	<script src="./static/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./api/orderConfirmAddr.js"></script>
+</body>
+</html>

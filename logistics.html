@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./static/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_nrqiid881b4holxr.css">
+		<link rel="stylesheet" href="./static/css/style.css" />
+	</head>
+
+	<body>
+		<div class="layout layout-login">
+			<header id="header" class="mui-bar mui-bar-nav ">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">Package Tracking</h1>
+			</header>
+			<nav class="mui-bar mui-bar-tab">
+				<a class="mui-tab-item" id="homePage">
+					<span class="mui-icon iconfont icon-shanghu1"></span>
+					<span class="mui-tab-label">Home</span>
+				</a>
+				<a class="mui-tab-item" id="carPage">
+					<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge">5</span></span>
+					<span class="mui-tab-label">Cart</span>
+				</a>
+				<a class="mui-tab-item" id="mePage">
+					<span class="mui-icon iconfont icon-me"></span>
+					<span class="mui-tab-label">Me</span>
+				</a>
+				<a class="mui-tab-item" id="morePage">
+					<span class="mui-icon iconfont icon-iconfonthome"></span>
+					<span class="mui-tab-label">More</span>
+				</a>
+			</nav>
+			<div class="mui-content">
+				<!-- 物流跟踪头部开始 -->
+				<div class="package-tracking-title">
+					<p>Package tracking:item was delivered and signed by customer.</p>
+					<p>Your item(s) is (are) being sent by S.F.Express Logis-tics.</p>
+				</div>	
+				<!-- 物流跟踪头部结束 -->
+				<!-- 物流详情开始 -->
+				<div class="Logistics-details">
+					<ul class="Logistics-details-ul" id="logisticsbox">
+						<!-- <li>
+							<p>[上海市]快件已被签收，期待再次为你服务</p>
+							<p>2017-03-03 11:04:50</p>
+						</li>
+						<li>
+							<p>[上海市]快件已被签收，期待再次为你服务</p>
+							<p>2017-03-03 11:04:50</p>
+						<li>
+							<p>[上海市]快件已被签收，期待再次为你服务</p>
+							<p>2017-03-03 11:04:50</p>
+						</li>	 -->							
+					</ul>
+				</div>
+				<!-- 物流详情结束 -->
+			</div>
+		</div>
+
+		<script id='logisticsTemplate' type='text/html'>
+			{{each logisticslist as val i}}
+				<li>
+					<p>{{val.remark}}</p>
+					<p>{{val.datetime}}</p>
+				</li>
+			{{/each}}
+		</script>
+		<script id='errlogisticsTemplate' type='text/html'>
+			<li>
+				<p>{{reason}}</p>
+			</li>
+		</script>
+		<script src="./api/testOrFormal.js"></script>
+		<script src="./static/js/mui.min.js"></script>
+		<script src="./static/js/template.js"></script>
+		<script src="./static/js/jquery.min.js"></script>
+		<script src="./api/isLogin.js"></script>
+		<script>
+			$(function(){
+				var company = getQueryString('company');
+				var logistics = getQueryString('logistics');
+				getdata (company,logistics);
+				function getdata (company,logistics) {
+					var token = localStorage.getItem("token");
+					$.ajax({
+						beforeSend: function(request) {
+			                request.setRequestHeader("TOKEN", token);
+			            },
+						url: csOrzs + '/Api/Order/getLogistics',
+						type: 'POST',
+						data: {
+							company: company,
+							logistics: logistics
+						},
+					})
+					.done(function(data) {
+						console.log(data);
+						if (data.code == 1) {
+							var logisticsData = data.data.result.list;
+							var logisticslist2 = {"logisticslist":logisticsData};
+							var logisticsHtml = template('logisticsTemplate', logisticslist2);
+							$('#logisticsbox').html(logisticsHtml);
+						} else {
+							var logisticsData = data.data.reason;
+							var logisticsHtml2 = template('errlogisticsTemplate', logisticsData);
+							$('#logisticsbox').html(logisticsHtml2);
+						}	
+					})
+					.fail(function() {
+						mui.toast("Network error, please try again!");
+					});
+					
+				}
+
+				// 获取地址栏参数
+				function getQueryString(name) {
+			        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			        var r = window.location.search.substr(1).match(reg);
+			    if (r != null) {
+			        return unescape(r[2]);
+			    }     
+			        return null;
+			    }
+			});
+		</script>
+	</body>
+
+</html>

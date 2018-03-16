@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>search-result</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_jmbdwkgo4etdquxr.css">
+	<style type="text/css">
+		#list {
+			/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+			margin-top: -1px;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout layout-shop-search">
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left shop-search-left"></a>
+			<div class="shop-search-input">
+				<input class="search-input" id="searchkeywords" type="text" placeholder="Search"/>
+				<i class="iconfont icon-sousuo" id="shopsearchbtn"></i>
+			</div>
+		</header>
+		<!-- <nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" href="./home-page.html">
+				<span class="mui-icon iconfont icon-shanghu1"></span>
+				<span class="mui-tab-label">Home</span>
+			</a>
+			<a class="mui-tab-item" href="./cart.html">
+				<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">Cart</span>
+			</a>
+			<a class="mui-tab-item" href="./me.html">
+				<span class="mui-icon iconfont icon-me"></span>
+				<span class="mui-tab-label">Me</span>
+			</a>
+			<a class="mui-tab-item" href="./more.html">
+				<span class="mui-icon iconfont icon-iconfonthome"></span>
+				<span class="mui-tab-label">More</span>
+			</a>
+		</nav> -->
+		<div class="mui-content shop-search-content">
+			<!-- <span class="iconfont icon-sousuo"></span>
+			<div class="search-history">
+				<p>Search History</p>
+				<span class="iconfont icon-shanchu del" id="removeHistory"></span>
+				<div class="history-txt">
+					<li><a href="">Beaf</a></li>
+					<li><a href="">Brre&Cider</a></li>
+					<li><a href="">Small Appliances</a></li>
+					<li><a href="">Brre&Cider</a></li>
+					<li><a href="">Brre&Cider</a></li>
+				</div>
+			</div>
+			<div class="search-popular">
+				<p>Popular Search</p>
+				<div class="popular-txt">
+					<li><a href="">Beaf</a></li>
+					<li><a href="">Brre&Cider</a></li>
+					<li><a href="">Small Appliances</a></li>
+					<li><a href="">Brre&Cider</a></li>
+					<li><a href="">Brre&Cider</a></li>
+					<li><a href="">Brre&Cider</a></li>
+				</div>
+			</div> -->
+            
+		</div>		
+	</div>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./api/shopSearch.js"></script>
+</body>
+</html>

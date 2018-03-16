@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add a new address</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link href="./static/css/mui.picker.all.css" rel="stylesheet" />
+	<link href="./static/css/mui.poppicker.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+</head>
+<body>
+	<div class="layout layout-city">
+		<!-- <header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Add a new address</h1>
+		</header> -->
+		<span id="subto" class="invoice-btn">Submit</span>
+		<div class="mui-content addressContent">
+			<div class="mui-input-group" id="inputAdd">
+				<div class="mui-input-row">
+					<label>Full&nbsp;name：</label>
+					<input type="text"  id="name" placeholder="" >
+				</div>				
+				<div class="mui-input-row">
+					<label>Phone&nbsp;number：</label>
+					<input type="text"  id="number" placeholder="" >
+				</div>				
+				<!-- 三级联动开始 -->
+	    		<div id="showCityPicker3" class="mui-input-row">
+	    			<label class="region">Region：</label>
+	    			<input type="" name="" id="cityResult3" value="" />
+	    			
+	    		</div>
+	    		<!-- 三级联动结束 -->
+	    		<textarea id="textarea" rows="5" placeholder="Please write down your detailed address"></textarea>
+			</div> 
+			<div class="mui-input-row mui-checkbox mui-left setDefault" id="defaultBtn">
+			  	<label>Set as Default</label>
+			  	<input id="checkDeafult" name="checkbox1" value="Item 1" type="checkbox">
+			</div>
+		</div>
+	</div>
+	
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/mui.picker.min.js"></script>
+	<script src="./static/js/mui.poppicker.js"></script>
+	<script src="./static/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./api/addAddress.js"></script>
+</body>
+</html>

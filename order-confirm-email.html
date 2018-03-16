@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Order-confirm</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_493593_17fvegvu6w7y14i.css">
+
+</head>
+<body>
+	<div class="layout">
+		<div class="mui-content order-page-content" id="databox">
+			<!-- <div class="order-packing">
+				<div class="mui-confirmation">
+					<div class="select-address order-con">
+						<p class="email">You will receive a confirmation email.Please show the email upon your arrival</p>
+						<img src="./static/images/letter.jpg" alt="" class="letter">
+					</div>
+					<div class="order-con confirm-email" id="changeEmail">
+						<a class="mui-navigate-right">
+							<p id="emailText" >21233212@163.com</p>
+						</a>
+					</div>
+				</div>
+				<ul class="order-email-ul">
+					<li class="order-email-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							<div class="shop-name">
+								<span>shopname</span><i class="iconfont icon-arrowright"></i>
+							</div>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>
+							</li>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>								
+							</li>
+						</ul>
+					</li>
+					<li class="order-email-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							<div class="shop-name">
+								<span>shopname</span><i class="iconfont icon-arrowright"></i>
+							</div>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>
+							</li>
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="./static/images/home-product1.jpg" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+									<em class="price">￥100</em><em class="number">x1</em>
+								</div>								
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			
+			<footer class="footer-order">
+				<div class="total">Total:￥<span class="sumNumber"></span></div>
+				<div class="submit">Submit</div>
+			</footer> -->
+		</div>
+	</div>
+	<script id='orderEmailTemplate' type="text/html">
+		<div class="order-packing">
+			<div class="mui-confirmation">
+				<div class="select-address order-con">
+					<p class="email">You will receive a confirmation email.Please show the email upon your arrival</p>
+					<img src="./static/images/letter.jpg" alt="" class="letter">
+				</div>
+				<div class="order-con confirm-email" id="changeEmail">
+					<a class="mui-navigate-right">
+						<p id="emailText" >{{address.email}}</p>
+					</a>
+				</div>
+			</div>
+			<ul class="order-email-ul">
+				{{each merchant as val index}}
+					<li class="order-email-li">
+						<ul class="mui-table-view home-pick-list order-list">
+							<div class="shop-name">
+								<span>{{val.merchant_name}}</span><i class="iconfont icon-arrowright"></i>
+							</div>
+							{{each val.list as val2 index}}
+							<li class="mui-table-view-cell">
+								<div class="home-pick-img">
+									<img src="{{val2.goods_picture}}" alt="">
+								</div>
+								<div class="home-pick-info order-confirm-info">
+									<p>{{val2.goods_name}}</p>
+									<p>{{val2.goods_type_one}} {{val2.goods_type_two}}</p>
+									<em class="price">
+									{{if val2.goods_sale_price}}
+									￥{{val2.goods_sale_price}}
+									<del>￥{{val2.goods_price}}</del>
+									{{else}}
+									￥{{val2.goods_price}}
+									{{/if}}
+									</em>
+									<em class="number">x{{val2.goods_cnt}}</em>
+								</div>
+							</li>
+							{{/each}}
+						</ul>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+		
+		<footer class="footer-order">
+			<div class="total">Total:￥<span class="sumNumber">{{total}}</span></div>
+			<div class="submit">Submit</div>
+		</footer>
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./api/orderConfirmEmail.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Refund</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+	<style type="text/css">
+		#list {
+			/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+			margin-top: -1px;
+		}
+		.hide {
+			display: none;
+		}
+		.refundSubmit {
+			display: inline-block;
+			line-height: 40px;
+		}
+		.refund-prompt p {
+			margin-top: 2px;
+		}
+		.refund-prompt p:nth-child(1) {
+			margin-top: 15px;
+		}
+		/*#file {
+			width: 104px;
+			height: 90px;
+		}*/
+	</style>
+</head>
+<body>
+	<div class="layer-box" style="display: none; background-color: rgba(0,0,0,0.2);">
+		<i class="loading-icon loading-rotate"></i>
+	</div>
+	<div class="layout home-layout" id="app">
+		<!-- <header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Refund</h1>
+		</header> -->
+		<!-- <nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" href="./home-page.html">
+				<span class="mui-icon iconfont icon-shanghu1"></span>
+				<span class="mui-tab-label">Home</span>
+			</a>
+			<a class="mui-tab-item" href="./cart.html">
+				<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">Cart</span>
+			</a>
+			<a class="mui-tab-item mui-active" href="#Me">
+				<span class="mui-icon iconfont icon-me"></span>
+				<span class="mui-tab-label">Me</span>
+			</a>
+			<a class="mui-tab-item" href="./more.html">
+				<span class="mui-icon iconfont icon-iconfonthome"></span>
+				<span class="mui-tab-label">More</span>
+			</a>
+		</nav> -->
+		<div class="mui-content " >
+			<article class="refund-content">
+				<p>Return Reasons</p>
+				<form action="#">
+					<div class="refundCancel">
+						<textarea rows="8" id="refundTextarea"></textarea>
+					</div>
+	                <div class="container">
+	                    <!--    照片添加    -->
+	                    <div class="z_photo">
+	                        <div class="z_file">
+	                            <input type="file" name="file" id="file" value="" accept="image/*" onchange="imgChange('z_photo','z_file');" />
+	            				<div class="add-photo">Add Photo</div>
+	                        </div>
+
+	                    </div>
+	                    <!--遮罩层-->
+	                    <div class="z_mask">
+	                        <!--弹出框-->
+	                        <div class="z_alert">
+	                            <p class="z_img">Are you sure you want to delete this picture?</p>
+	                            <p class="tck">
+	                                <span class="z_cancel">cancel</span>
+	                                <span class="z_sure">sure</span>
+	                            </p>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="submit-box">
+						<!-- <input class="refundSubmit" id="refundSubmit" type="submit" name="Submit" value="SUBMIT" /> -->
+						<span class="refundSubmit" id="refundSubmit">SUBMIT</span>
+					</div> 
+				</form>
+			</article>
+
+			<div class="refund-prompt">
+				<p>Customer service staff will contact you within five working days from the day you submit the application.</p>
+                <p style="color: #f6442b; margin-top: 8px;">＊ Notice</p>
+                <p>If you want to return the goods you received, please attach a note with your mobile numb er, email address and order number in your parcel.</p>
+			</div>
+		</div>
+		<div class="no-address-info hide">No refunding order</div>
+	</div>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+    <script src="./api/refund.js"></script>
+    <script src="./api/isLogin.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./static/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_nrqiid881b4holxr.css">
+		<link rel="stylesheet" href="./static/css/style.css" />
+	</head>
+	<body>
+		<div class="layout layout-register">
+			<nav class="mui-bar mui-bar-tab">
+				<a class="mui-tab-item" id="homePage">
+					<span class="mui-icon iconfont icon-shanghu1"></span>
+					<span class="mui-tab-label">Home</span>
+				</a>
+				<a class="mui-tab-item" id="carPage">
+					<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+					<span class="mui-tab-label">Cart</span>
+				</a>
+				<a class="mui-tab-item" id="mePage">
+					<span class="mui-icon iconfont icon-me"></span>
+					<span class="mui-tab-label">Me</span>
+				</a>
+				<a class="mui-tab-item" id="morePage">
+					<span class="mui-icon iconfont icon-iconfonthome"></span>
+					<span class="mui-tab-label">More</span>
+				</a>
+			</nav>
+
+			<div class="start-buy">
+				<p><span class="iconfont icon-duihao"></span>Start Shopping</p>
+				<a href="" id="done">Done</a>	
+			</div>	
+			<div class="mui-content register-content">
+				<div class="login-page">
+					<div class="logo-img">
+						<i class="logo-svg"></i>
+					</div>
+					<div class="login-form">
+						<div class="login-tel clearfix">
+							<input id="phoneNumber" type="text" placeholder="Enter phone number" />
+							<button id="getCode" type="button" class="mui-btn">Send Code</button>
+						</div>
+						<div class="login-code">
+							<input id="code" type="text" placeholder="Enter verification code " />
+						</div>
+						<div class="login-address">
+							<input id="email" type="text" placeholder="Email address " />
+						</div>
+						<div class="login-name">
+							<input id="name" type="text" placeholder="Username " />
+						</div>
+						<div class="login-password">
+							<input id="password" type="text" placeholder="Password " />
+						</div>						
+						<div class="login-btn">
+							<button type="button" id="loginBtn" class="mui-btn">Submit</button>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+		<script src="./api/testOrFormal.js"></script>
+		<!-- http%3A%2F%2Fproj9.thatsmags.com%2Fthatsmart%2Ftemplate%2Flogin.html -->
+		<script src="./static/js/mui.min.js"></script>
+		<script src="./static/js/jquery.min.js"></script>
+		<script src="./api/isLogin.js"></script>
+		<script src="./api/register.js"></script>
+	</body>
+
+</html>

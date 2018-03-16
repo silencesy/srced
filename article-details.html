@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+</head>
+<body>
+	<div class="layout home-layout art-layout">
+		<a href="./index.html"><i class="iconfont icon-shanghu1 go-home"></i></a>
+		<div class="mui-content">
+			<div id="articleTextBox">
+				<div class="art-title">
+					<p class="title"></p>
+					<p class="time"></p>
+				</div>
+				<div class="art-content clearfix">
+					
+				</div>
+			</div>
+			<div class="art-content clearfix" id="articleContent">
+				
+			</div>
+			<div class="line"></div>
+			<div class="recommend-art">
+				<div class="recommend-art-title">
+					<span>More Editor’s Pick</span>
+				</div>
+				<ul class="mui-table-view home-pick-list" id="recommendBox">
+					<!-- <a href="article-details.html">
+						<li class="mui-table-view-cell">
+							<div class="home-pick-img">
+								<img src="./static/images/home-product1.jpg" alt="">
+							</div>
+							<div class="home-pick-info">
+								<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+								<em class="date">2017-10-24</em>
+							</div>
+						</li>
+					</a> -->
+				</ul>
+				<div class="recommend-art-more">
+					<a href="./article-list.html">More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 推荐文章列表 -->
+	<script id="recommend" type="text/html">
+	    {{each recommendList as val}}
+	    	<a href="article-details.html?articlesid={{val.id}}">
+				<li class="mui-table-view-cell">
+					<div class="home-pick-img">
+						<img src="{{val.coverpic}}" alt="">
+					</div>
+					<div class="home-pick-info">
+						<p>{{val.article_name}}</p>
+						<em class="date">{{val.create_time}}</em>
+					</div>
+				</li>
+			</a>
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./api/articleDetails.js"></script>
+</body>
+</html>

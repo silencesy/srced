@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cart</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_jmbdwkgo4etdquxr.css">
+	<style>
+		#header {
+			display: none;
+		}
+		.mui-content {
+			display: none;
+		}
+		.cart-empty-box {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout cart-layout" id="app">
+		<header id="header" class="mui-bar mui-bar-nav ">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Cart</h1>
+			<button class="mui-btn mui-btn-link mui-pull-right edit-btn" id="editBtn">Edit</button>
+			<button class="mui-btn mui-btn-link mui-pull-right done-btn" id="doneBtn">Done</button>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" id="homePage">
+				<span class="mui-icon iconfont icon-shanghu1"></span>
+				<span class="mui-tab-label">Home</span>
+			</a>
+			<a class="mui-tab-item mui-active" id="carPage">
+				<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+				<span class="mui-tab-label">Cart</span>
+			</a>
+			<a class="mui-tab-item" id="mePage">
+				<span class="mui-icon iconfont icon-me"></span>
+				<span class="mui-tab-label">Me</span>
+			</a>
+			<a class="mui-tab-item" id="morePage">
+				<span class="mui-icon iconfont icon-iconfonthome"></span>
+				<span class="mui-tab-label">More</span>
+			</a>
+		</nav>
+		<div class="cart-empty-box">
+			<span class="mui-icon iconfont icon-gouwuche"></span>
+			<p>Your shopping cart is empty</p>
+			<a href="index.html">start shopping</a>
+		</div>
+		<div class="mui-content">
+			
+			<div id="cart" class="cart mui-control-content mui-active">
+				<ul id="cartList" class="mui-table-view cart-table-view">
+					
+					<!-- <li class="mui-table-view-cell">
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn smart-theme-color">Delete</a>
+						</div>
+						<div class="mui-slider-handle">
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="product-list-info">
+									<a href="login.html">
+										<p>itemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemit</p>
+									</a>
+									<p><em>blue</em> <em>l</em></p>
+									 <div class="product-buy-info clearfix">
+										<span class="product-list-price fl">￥<em class="price">23.00</em></span>
+										<span class="product-list-number fr">x<em class="number">1</em></span>
+									</div> 
+									<div class="sub-add">
+										<i class="iconfont icon-icon sub"></i>
+										<input type="text" value="1">
+										<i class="iconfont icon-jia add"></i>
+									</div>
+								</div>
+								<label>		
+									<a href="login.html">
+										<img src="./static/images/prodeuctdemo.png" alt="">
+									</a>					
+									
+								</label>
+								<input name="checkbox" class="listCheckBox" value="23" number='1' type="checkbox" >
+							</div>
+						</div>
+					</li> -->
+				</ul>
+				<!-- 结算导航栏 -->
+				<nav class="settlement-box" id="checkAll">
+					<div class="mui-input-row mui-checkbox mui-left">
+						<label >All</label>
+						<input name="checkbox" id="checkAllInput" type="checkbox" >
+					</div>
+					<div class="total">
+						Total:<span>￥<em id="sumPrice">0.00</em></span>
+					</div>
+					<span class="buy-btn" id="toPay">Buy</span>
+					<span class="buy-btn do-delete" id="doDelete">Delete</span>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<script id='cartTemplate' type='text/html'>
+		{{each cartList as val index}}
+			<li class="mui-table-view-cell">
+				<div class="mui-slider-right mui-disabled">
+					<a class="mui-btn smart-theme-color">Delete</a>
+				</div>
+				<div class="mui-slider-handle">
+					<div class="mui-input-row mui-checkbox mui-left">
+						<div class="product-list-info">
+							<a href="product-detail.html?productid={{val.id}}">
+								<p>{{val.goods_name}}</p>
+							</a>
+							<p><em>{{val.goods_type_one}}</em> <em>{{val.goods_type_two}}</em></p>
+							 <div class="product-buy-info clearfix">
+								<span class="product-list-price fl">
+								{{if val.goods_sale_price}}
+								￥<em class="price">{{val.goods_sale_price}}</em> 
+								<del>￥{{val.goods_price}}</del>
+								{{else}}
+								￥<em class="price">{{val.goods_price}}</em> 
+								<del></del>
+								{{/if}}
+								</span>
+								<span class="product-list-number fr">x<em class="number">{{val.goods_cnt}}</em></span>
+							</div> 
+							<div class="sub-add">
+								<i class="iconfont icon-icon sub"></i>
+								<input class="edit-input" readonly="readonly" cartid="{{val.cart_id}}" type="text" value="{{val.goods_cnt}}">
+								<i class="iconfont icon-jia add"></i>
+							</div>
+						</div>
+						<label>		
+							<a href="product-detail.html?productid={{val.id}}">
+								<img class="lazy" data-original="{{val.goods_picture}}" alt="">
+							</a>					
+						</label>
+						<input name="checkbox" class="listCheckBox" value="{{val.goods_cnt}}" priceid="{{val.price_id}}" cartid="{{val.cart_id}}" type="checkbox" >
+					</div>
+				</div>
+			</li>
+		{{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./api/isLogin.js"></script>
+	<script src="./api/cart.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="./static/css/mui.min.css">
+		<link rel="stylesheet" href="./static/css/style.css">
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_0r1b8oe2twukgldi.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			/*p {
+				text-indent: 22px;
+			}*/
+			span.mui-icon {
+				font-size: 14px;
+				color: #007aff;
+				margin-left: -15px;
+				padding-right: 10px;
+			}
+			.mui-off-canvas-left {
+				background-color: #fff;
+			}
+			.title {
+				margin: 35px 15px 10px;
+			}
+			.title+.content {
+				margin: 10px 15px 35px;
+				color: #bbb;
+				text-indent: 1em;
+				font-size: 14px;
+				line-height: 24px;
+			}
+			input {
+				color: #000;
+			}
+
+			.mui-off-canvas-wrap.mui-active .mui-off-canvas-backdrop {
+				background: rgba(0,0,0,.2);
+				box-shadow: 0 0 0 0;
+			}
+			.sort-box {
+				height: 44px;
+				line-height: 44px;
+				width: 92%;
+				background-color: red;
+				float: right;
+			}
+			.search-rank {
+				position: fixed;
+				top: 0;
+				left: 0;
+			}
+			.rank-jiantou2 {
+				right: 13%;
+				bottom: 31%;
+			}
+			.rank-jiantou {
+				left: 33%;
+				bottom: 31%;
+			}
+			.sales-count {
+				color: #999;
+				font-size: 14px;
+				line-height: 12px !important;
+			}
+			#CategoriesList li.active a {
+				color: #f6442b;
+			}
+			.activesave {
+				color: #f6442b !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="offCanvasWrapper" class="all-category-flag mui-off-canvas-wrap mui-draggable">
+			<!--侧滑菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-left">
+				<div id="offCanvasSideScroll">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view" id="CategoriesList">
+								<!-- <li class="mui-table-view-cell" cat_id="1">
+									<a href="javascript:void(0);" class="mui-navigate-right">Ticketing</a>
+								</li> -->
+							</ul>		
+						</div>
+					</div>
+				</div>
+			</aside> 
+			<!--主界面部分-->
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<a href="#offCanvasSide" class="mui-icon iconfont icon-fenlei activesave"></a>
+					<div class="search-rank">
+						<div class="sales-box">
+							<span class="rank-sales">Sales</span>
+							<!-- <div class="rank-jiantou">
+								<span class="iconfont icon-xiangshangjiantou-copy-copy-copy-copy jiantou1"></span>
+								<span class="iconfont icon-xiangshangjiantou-copy-copy-copy jiantou2"></span>
+							</div> -->
+						</div>
+						<div class="price-box">
+							<span class="rank-price">Price</span>
+							<div class="rank-jiantou2">
+								<span class="iconfont icon-xiangshangjiantou-copy-copy-copy-copy"></span>
+								<span class="iconfont icon-xiangshangjiantou-copy-copy-copy"></span>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="wall wall-content" id="listdata"></ul>
+					</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+		<script id="categorytitles" type="text/html">
+			<li class="mui-table-view-cell" cat_id="0">
+				<a href="javascript:void(0);" class="mui-navigate-right">All</a>
+			</li>
+		    {{each categorytitlesList as val}}
+		    	<li class="mui-table-view-cell" cat_id="{{val.id}}">
+					<a href="javascript:void(0);" class="mui-navigate-right">{{val.name}}</a>
+				</li>
+		    {{/each}}
+		</script>
+		<script id="categorys" type="text/html">
+		    {{each categorysList as val}}
+		    	<li class="waterfall">
+					<a href="product-detail.html?productid={{val.id}}">
+						<img class="lazy" src="{{val.coverpic}}" />
+						<p>{{val.goods_name}}</p>
+					</a>
+					<p class="sales-count">Sales volume : {{val.sale_count}}</p>
+					{{if val.goods_sale_price}}
+					<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
+					{{else}}
+					<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
+					{{/if}}
+					<!-- <span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span> -->
+					
+				</li>
+		    {{/each}}
+		</script>
+		<script src="./api/testOrFormal.js"></script>
+		<script src="./static/js/mui.min.js"></script>
+		<script src="./static/js/jquery.min.js"></script>
+		<script src="./static/js/masonry.pkgd.min.js"></script>
+		<script src="./static/js/imagesloaded.pkgd.min.js"></script>
+		<script src="./static/js/template.js"></script>
+	
+		<script>
+		(function(mui) {
+			mui.ready(function() {
+				getCatoryTitle ();
+
+				// 获取数据参数
+				var categoryid =  getQueryString('categoryid') || 0;
+				var page = 0;
+				// 开启瀑布流
+				var $grid = $('.wall-content').masonry({
+					itemSelector: '.waterfall',
+					percentPosition: true
+				});
+				var sort;
+
+				//侧滑容器父节点
+				var offCanvasWrapper = mui('#offCanvasWrapper');
+				//主界面容器
+				var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+				//菜单容器
+				var offCanvasSide = document.getElementById("offCanvasSide");
+				// 整体滑动
+				offCanvasInner.insertBefore(offCanvasSide, offCanvasInner.firstElementChild);
+				offCanvasWrapper.offCanvas().refresh();
+				// 点击a标签跳转
+				mui('body').on('tap','a',function(){document.location.href=this.href;});
+				// 点击分类获取数据
+				$('#CategoriesList').on('tap','.mui-table-view-cell',function(){
+					$('title').text($(this).children('a').text());
+					$('.search-rank > div > span').removeClass('activesave');
+					page = 0;
+					sort = null;
+					offCanvasWrapper.offCanvas('close');
+					$('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            categoryid = $(this).attr('cat_id');
+		            console.log($(this).attr('cat_id'));
+		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+					$('#CategoriesList .mui-table-view-cell').each(function(index, el) {
+						$(this).removeClass('active');
+					});
+					$(this).addClass('active');
+				});
+				
+				// 上拉加载
+				mui.init({
+					pullRefresh: {
+						container: '#offCanvasContentScroll',
+						up: {
+							auto:true,
+							contentrefresh : "Loading…",
+							callback: pullupRefresh
+						}
+					}
+				});
+				function pullupRefresh() {
+					++page;
+					$.ajax({
+						url: csOrzs + '/Api/Archive/getList',
+						type: 'GET',
+						data: {
+		                        'cat_id': categoryid,
+		                        'p': page,
+		                        'pageSize': '8',
+		                        'sort': sort
+		                    },
+					})
+					.done(function(response) {
+						console.log(response)
+						if (response.code == 1) {
+							var categoryData = response;
+		                	var totalPages = categoryData.data.totalPages;
+		            		var dataList = categoryData.data.goods;
+							mui('#offCanvasContentScroll').pullRefresh().endPullupToRefresh((page == totalPages || totalPages == 0));
+							// 固定写法
+							var categorysList2 = {"categorysList":dataList};
+							var categorysHtml = template('categorys', categorysList2);
+							// console.log(categorysHtml);
+			                var dataHtml = $(categorysHtml);
+						  	$grid.append( dataHtml ).masonry( 'appended', dataHtml );
+							$grid.imagesLoaded().progress( function() {
+						  		$grid.masonry();
+							});  
+							// mui('.mui-scroll-wrapper').pullRefresh().scrollTo(1, 1, 100);
+						} else {
+							mui('#offCanvasContentScroll').pullRefresh().endPullupToRefresh(true);
+							mui.toast("Network error, please try again!");
+						}
+						
+					})
+					.fail(function() {
+						mui('#offCanvasContentScroll').pullRefresh().endPullupToRefresh(true);
+						mui.toast("Network error, please try again!");
+					});
+				}
+				// 开启抽屉栏滚动区域
+				mui('.mui-scroll-wrapper').scroll({
+					deceleration: 0.0030 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+				// mui('body').on('tap','.price-box',function(){
+			 //        if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == false && $('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == false) {
+			 //            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+			 //            sort = 2;
+			 //            page = 0;
+			 //            $('.waterfall').each(function(index, el) {
+			 //                $grid.masonry( 'remove', $(this)).masonry('layout');;
+			 //            });
+			 //            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+			 //            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //        } else if ($('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == true) {
+			 //            $('.rank-jiantou2 > span').each(function(index, el) {
+			 //                $(this).removeClass('activesave');
+			 //            });
+			 //            $('.icon-xiangshangjiantou-copy-copy-copy-copy').addClass('activesave');
+			 //            sort = 1;
+			 //            page = 0;
+			 //            $('.waterfall').each(function(index, el) {
+			 //                $grid.masonry( 'remove', $(this)).masonry('layout');;
+			 //            });
+			 //            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+			 //            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //        } else if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == true) {
+			 //            $('.rank-jiantou2 > span').each(function(index, el) {
+			 //                $(this).removeClass('activesave');
+			 //            });
+			 //            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+			 //            sort = 2;
+			 //            page = 0;
+			 //            $('.waterfall').each(function(index, el) {
+			 //                $grid.masonry( 'remove', $(this)).masonry('layout');;
+			 //            });
+			 //            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+			 //            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+			 //            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //        }
+			        
+			 //    });
+			 //    mui('body').on('tap','.sales-box',function(){
+			 //    	$(this).children('span').addClass('activesave');
+			 //    	$('.rank-jiantou2 > span').each(function(index, el) {
+		  //               $(this).removeClass('activesave');
+		  //           });
+			 //    	sort = 3;
+		  //           page = 0;
+		  //           $('.waterfall').each(function(index, el) {
+		  //               $grid.masonry( 'remove', $(this)).masonry('layout');;
+		  //           });
+		  //           mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+		  //           mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+		  //           mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+			 //    });
+			// 价格排序
+            mui('body').on('tap','.price-box',function(){
+            	$('.search-rank > div > span').removeClass('activesave');
+            	$(this).children('.rank-price').addClass('activesave');
+		        if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == false && $('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == false) {
+		        	console.log(1);
+		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+		            sort = 2;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == true) {
+		        	console.log(2);
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            $('.icon-xiangshangjiantou-copy-copy-copy-copy').addClass('activesave');
+		            sort = 1;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == true) {
+		        	console.log(3);
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+		            sort = 2;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+		            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+		            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		        }
+		    });
+		    // 销量排序
+		    mui('body').on('tap','.sales-box',function(){
+		    	$('.search-rank > div > span').removeClass('activesave');
+		    	$('.rank-price').removeClass('activesave');
+		    	$(this).children('.rank-sales').addClass('activesave');
+		    	$('.rank-jiantou2 > span').each(function(index, el) {
+	                $(this).removeClass('activesave');
+	            });
+		    	sort = 3;
+	            page = 0;
+	            $('.waterfall').each(function(index, el) {
+	                $grid.masonry( 'remove', $(this)).masonry('layout');;
+	            });
+	            mui('#offCanvasContentScroll').pullRefresh().refresh(true);
+	            mui('#offCanvasContentScroll').pullRefresh().pullupLoading();
+	            mui('#offCanvasContentScroll').pullRefresh().scrollTo(1, 1, 100);
+		    });
+			// 获取分类信息
+			function getCatoryTitle () {
+				$.ajax({
+					url: csOrzs + '/Api/Archive/getGoodsCats',
+					type: 'GET'
+				})
+				.done(function(data) {
+					console.log(data);
+					if (data.code == 1) {
+						var CategoriesList = data.data;
+						var categorytitlesList2 = {"categorytitlesList":CategoriesList};
+						var categorytitlesHtml = template('categorytitles', categorytitlesList2);
+						$('#CategoriesList').html(categorytitlesHtml);
+						highlight ();
+					} else {
+						mui.toast("Network error, please try again!");
+					}
+				})
+				.fail(function() {
+					mui.toast("Network error, please try again!");
+				});
+			}
+			
+			// 高亮显示分类
+			function highlight () {
+				$('#CategoriesList li').each(function(index, el) {
+					if(index == categoryid) {
+						$(this).addClass('active');
+					} else if (categoryid == 0) {
+						$('title').text('All');
+					} else if (categoryid == 1) {
+						$('title').text('Ticketing');
+					} else if (categoryid == 2) {
+						$('title').text('Coupon');
+					} 
+				});
+			}
+			// 获取页面参数函数
+			function getQueryString(name) {
+				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+					var r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					return unescape(r[2]);
+				}
+					return null;
+			}
+			});
+
+				
+		})(mui);
+		</script>
+	</body>
+
+</html>

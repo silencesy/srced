@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add your review</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+        <!-- 字体图标 -->
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_y2nyratgm34n29.css">
+    </head>
+
+    <body>
+        <div class="layout comments-page-layout">
+            <button class="comments-btn" id="submit">Submit</button>
+            <div class="mui-content feedback">
+                <ul class="mui-table-view result-ul">
+                    <li class="mui-table-view-cell">
+                        <a href="#">
+                            <img class="list-li-img" src="./static/images/prodeuctdemo.png">
+                            <div class="product-list-info">
+                                <p>itemitemitemitemitemitemiteemitemitemitemiteemitemitemitemiteemitemitemitemiteemitemitemitemiteemitemitemitemitemitemitemitemitem</p>
+                            </div>
+                        </a>
+                    </li>       
+                </ul>
+                <div class="row mui-input-row">
+                    <textarea id='question' class="mui-input-clear question" placeholder="Please write down your review here!"></textarea>
+                </div>
+                <div id='image-list' class="row image-list"></div>
+            </div>
+        </div>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/feedback-page.js"></script>
+        <script src="./static/js/feedback.js"></script>
+        <script>
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>product-list</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_b86z5o3kc56zuxr.css">
+	<style>
+		.activesave {
+			color: #f6442b !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout search-result-layout">
+		<header id="header" class="mui-bar mui-bar-nav search-all-header">
+			<div class="search-rank product-list">
+				<div class="sales-box">
+					<span class="rank-sales">Sales</span>
+				</div>
+				<div class="price-box">
+					<span class="rank-price">Price</span>
+					<div class="rank-jiantou2">
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy-copy"></span>
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy"></span>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+			<div class="wrapper-result mui-scroll">
+				<ul class="wall wall-content" id="listdata">
+					
+				</ul>
+			</div>
+		</div>	
+	</div>
+	<script id="categorys" type="text/html">
+	    {{each categorysList as val}}
+	    	<li class="waterfall">
+				<a href="product-detail.html?productid={{val.id}}">
+					<img class="lazy" src="{{val.coverpic}}" />
+					<p>{{val.goods_name}}</p>
+				</a>
+				<p class="sales-count">Sales volume : {{val.sale_count}}</p>
+				{{if val.goods_sale_price}}
+				<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
+				{{else}}
+				<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
+				{{/if}}
+				<!-- <span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span> -->
+				
+			</li>
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/masonry.pkgd.min.js"></script>
+	<script src="./static/js/imagesloaded.pkgd.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	
+	<script>
+		(function(mui) {
+			mui('body').on('tap','a',function(){document.location.href=this.href;});
+
+			var categoryid =  getQueryString('categoryid') || 1;
+			var $grid = $('.wall-content').masonry({
+				itemSelector: '.waterfall',
+				percentPosition: true
+			});
+
+			var sort;
+			// 价格排序
+            mui('body').on('tap','.price-box',function(){
+            	$('.search-rank.product-list > div > span').removeClass('activesave');
+            	$(this).children('.rank-price').addClass('activesave');
+		        if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == false && $('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == false) {
+		        	console.log(1);
+		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+		            sort = 2;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#pullrefresh').pullRefresh().refresh(true);
+		            mui('#pullrefresh').pullRefresh().pullupLoading();
+		            mui('#pullrefresh').pullRefresh().scrollTo(1, 1, 100);
+		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == true) {
+		        	console.log(2);
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            $('.icon-xiangshangjiantou-copy-copy-copy-copy').addClass('activesave');
+		            sort = 1;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#pullrefresh').pullRefresh().refresh(true);
+		            mui('#pullrefresh').pullRefresh().pullupLoading();
+		            mui('#pullrefresh').pullRefresh().scrollTo(1, 1, 100);
+		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == true) {
+		        	console.log(3);
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+		            sort = 2;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#pullrefresh').pullRefresh().refresh(true);
+		            mui('#pullrefresh').pullRefresh().pullupLoading();
+		            mui('#pullrefresh').pullRefresh().scrollTo(1, 1, 100);
+		        }
+		    });
+		    // 销量排序
+		    mui('body').on('tap','.sales-box',function(){
+		    	$('.search-rank.product-list > div > span').removeClass('activesave');
+		    	$(this).children('.rank-sales').addClass('activesave');
+		    	$('.rank-jiantou2 > span').each(function(index, el) {
+	                $(this).removeClass('activesave');
+	            });
+		    	sort = 3;
+	            page = 0;
+	            $('.waterfall').each(function(index, el) {
+	                $grid.masonry( 'remove', $(this)).masonry('layout');;
+	            });
+	            mui('#pullrefresh').pullRefresh().refresh(true);
+	            mui('#pullrefresh').pullRefresh().pullupLoading();
+	            mui('#pullrefresh').pullRefresh().scrollTo(1, 1, 100);
+		    });
+			
+			
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					// down: {
+					// 	contentdown : "Pull down to refresh",
+					// 	contentover : "Release to refresh",
+					// 	contentrefresh : "Loading…",
+					// 	callback: pulldownRefresh
+					// },
+					up: {
+						auto:true,
+						contentrefresh : "Loading…",
+						callback: pullupRefresh
+					}
+				}
+			});
+			var page = 0;
+			var sort;
+			function pullupRefresh() {
+				++page;
+				$.ajax({
+					url: csOrzs + '/Api/Set/getList',
+					type: 'GET',
+					data: {
+	                        'set_position': categoryid,
+	                        'p': page,
+	                        'pageSize': '8',
+	                        'sort': sort
+	                    },
+				})
+				.done(function(response) {
+					console.log(response);
+					if (response.code == 1) {
+						var categoryData = response;
+	                	var totalPages = categoryData.data.totalPages;
+	            		var dataList = categoryData.data.goods;
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh((page == totalPages || totalPages == 0));
+						var categorysList2 = {"categorysList":dataList};
+						var categorysHtml = template('categorys', categorysList2);
+		                var dataHtml = $(categorysHtml);
+		                console.log(dataHtml);
+					  	$grid.append( dataHtml ).masonry( 'appended', dataHtml );
+						$grid.imagesLoaded().progress( function() {
+					  		$grid.masonry();
+						});  
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						mui.toast("Network error, please try again!");
+					}
+					
+				})
+				.fail(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+					mui.toast("Network error, please try again!");
+				});
+			}
+
+
+            function getQueryString(name) {
+				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+					var r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					return unescape(r[2]);
+				}
+					return null;
+			}
+		})(mui);
+	</script>
+</body>
+</html>

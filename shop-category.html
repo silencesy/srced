@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>shop-category</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="./static/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="./static/css/style.css" />
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_jmbdwkgo4etdquxr.css" />
+	</head>
+
+	<body>	
+		<div class="layout">
+			<div class="shop-category">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right" id="AllCategories">
+							All Categories
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view" id="categorybox">
+					<!-- <li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							Category one
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							Category two
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							Category three
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							Category four
+						</a>
+					</li>								
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							Category seven
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="" class="mui-navigate-right">
+							Category eight
+						</a>
+					</li> -->												
+				</ul>				
+			</div>
+		</div>
+		<script id='categoryTemplate' type='text/html'>
+			{{each dataList as val index}}
+			<li class="mui-table-view-cell">
+				<a href="./shop-category-list.html?merchantCatId={{val.id}}" class="mui-navigate-right">
+					{{val.name}}
+				</a>
+			</li>
+			{{/each}}
+		</script>
+		<script src="./api/testOrFormal.js"></script>
+		<script src="./static/js/mui.min.js"></script>
+		<script src="./static/js/template.js"></script>
+		<script src="./static/js/jquery.min.js"></script>
+		<script>
+			(function(mui){
+				var merchantsid = getQueryString('merchantsid');
+				$('#AllCategories').on('click',function(){
+					$(this).attr('href','./shop-product-list.html?merchantsid='+ merchantsid +'&flag=1')
+				});
+
+				getData ();
+				function getData () {
+					$.ajax({
+						url: csOrzs + '/Api/Merchant/getCatList',
+						type: 'POST',
+						data: {merchant_id: merchantsid},
+					})
+					.done(function(data) {
+						console.log(data);
+						if (data.code ==1) {
+							var dataList = data.data;
+							var dataList2 = {"dataList":dataList};
+							var categoryHtml = template('categoryTemplate', dataList2);
+							$('#categorybox').html(categoryHtml);
+
+						} else {
+							mui.toast("Network error, please try again!");
+						}
+					})
+					.fail(function() {
+						mui.toast("Network error, please try again!");
+					});
+					
+				}
+
+				// 获取地址栏参数
+			    function getQueryString(name) {
+			        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			        var r = window.location.search.substr(1).match(reg);
+			        if (r != null) {
+			            return unescape(r[2]);
+			        }
+			        return null;
+			    }
+			})(mui);
+		</script>
+	</body>
+</html>

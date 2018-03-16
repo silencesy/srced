@@ -1,0 +1,403 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="./static/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="./static/css/swiper.min.css" />
+		<link rel="stylesheet" href="./static/css/style.css" />
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_jmbdwkgo4etdquxr.css" />
+		<style>
+		
+			.detail-layout .mui-content {
+				background-color: #fff;
+			}
+			.mui-preview-image.mui-fullscreen {
+				position: fixed;
+				z-index: 20;
+				background-color: #000;
+			}
+			.mui-preview-header,
+			.mui-preview-footer {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				z-index: 10;
+			}
+			.mui-preview-header {
+				height: 44px;
+				bottom: 0;
+			}
+			.mui-preview-footer {
+				height: 50px;
+				bottom: 0px;
+			}
+			.mui-preview-header .mui-preview-indicator {
+				display: block;
+				line-height: 25px;
+				color: #fff;
+				text-align: center;
+				margin: 15px auto 4;
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 12px;
+				font-size: 16px;
+			}
+			.mui-preview-image {
+				display: none;
+				-webkit-animation-duration: 0.5s;
+				animation-duration: 0.5s;
+				-webkit-animation-fill-mode: both;
+				animation-fill-mode: both;
+			}
+			.mui-preview-image.mui-preview-in {
+				-webkit-animation-name: fadeIn;
+				animation-name: fadeIn;
+			}
+			.mui-preview-image.mui-preview-out {
+				background: none;
+				-webkit-animation-name: fadeOut;
+				animation-name: fadeOut;
+			}
+			.mui-preview-image.mui-preview-out .mui-preview-header,
+			.mui-preview-image.mui-preview-out .mui-preview-footer {
+				display: none;
+			}
+			.mui-zoom-scroller {
+				position: absolute;
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				-webkit-box-pack: center;
+				-webkit-justify-content: center;
+				justify-content: center;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				-webkit-backface-visibility: hidden;
+			}
+			.mui-zoom {
+				-webkit-transform-style: preserve-3d;
+				transform-style: preserve-3d;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+				width: 100%;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+				display: inline-table;
+			}
+			.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.mui-preview-loading {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.mui-preview-loading.mui-active {
+				display: block;
+			}
+			.mui-preview-loading .mui-spinner-white {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -25px;
+				margin-top: -25px;
+				height: 50px;
+				width: 50px;
+			}
+			.mui-preview-image img.mui-transitioning {
+				-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+				transition: transform 0.5s ease, opacity 0.5s ease;
+			}
+			@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			.product-detail-imgs p img {
+				width: 100% !important;
+				height: auto !important;
+			}
+			.product-detail-imgs h2 img {
+				width: 100% !important;
+				height: auto !important;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<div class="layout detail-layout">
+			
+			<span id="goCartLogo" class="mui-icon iconfont icon-gouwuche"><span class="mui-badge pro-gouwuche"></span></span>
+			<div id='detailMask' class="detail-mask"></div>
+			<div class="choose-info" id="chooseInfo" productId='123'>
+				
+				<div id="chooseTem">
+					<!-- <span class="iconfont icon-guanbi" id="closeChoose"></span>
+					<div class="choose-info-imgtext clearfix" id="default">
+						<img id="CategoryPic" class="choose-info-img" src="./static/images/home-product1.jpg" alt="" data-preview-src="images/home-product1.jpg" data-preview-group="2" />
+						<div class="choose-info-text">
+							<p>￥<em id="CategoryPrice">300</em></p>
+							<p>Stock <em id="inStock">50</em></p>
+							<p>你选择的是: <em>类型1</em>+<em>类型2</em></p>
+						</div>
+					</div>
+					<div class="choose-box">
+						<div class="choose-classification">
+							<p>Type</p>
+							<p class="product-class-list1 clearfix">
+								<span class="leixing active">Child Ticket</span>
+							</p>
+						</div> 
+						<div class="choose-classification">
+							<p>Type</p>
+							<p class="product-class-list2 clearfix">
+								<span class="leixing active">Child Ticket</span>
+							</p>
+						</div>
+					</div> -->
+				</div>
+				<div class="choose-numbers clearfix">
+					<span class="fl">Quantity</span>
+					<div class="sub-add show fr">
+						<i class="iconfont icon-icon sub"></i>
+						<input id="productNumber" type="text" value="1">
+						<i class="iconfont icon-jia add"></i>
+					</div>
+				</div>
+				<div class="car-buy" id="maskAddPay">
+					<span id="addCartBtn">Add To Cart</span>
+					<span id="toPayBtn">Buy</span>
+				</div>
+				<div class="car-buy base" id="maskAddTo">
+					<span id="addCartBtn2">Done</span>
+				</div>
+				<div class="car-buy base car-buy-pay" id="maskToPay">
+					<span id="toPayBtn2">Done</span>
+				</div>
+			</div>
+			<!-- 评论底部开始 -->
+			<nav class="mui-bar mui-bar-tab mui-comment-bottom">
+				<a class="comment-bottom-item" id="goShop" href="">
+					<span class="mui-icon iconfont icon-shanghu1"></span>
+					<span class="mui-tab-label">Home</span>
+				</a>
+				<a class="comment-bottom-item" href="">
+					<span class="mui-icon iconfont icon-kefu"></span>
+					<span class="mui-tab-label">Chat</span>
+				</a>
+				<a class="comment-bottom-item" id="saveProduct">
+					<span class="mui-icon save-icon iconfont icon-shoucang1"></span>
+					<span class="mui-tab-label">Save</span>
+				</a>
+				<a class="comment-bottom-item addTo" href="" id="addTo">
+					<span class="mui-tab-label">Add To Cart</span>
+				</a>
+				<a class="comment-bottom-item toPay" href="" id="toPay">
+					<span class="mui-tab-label">Buy</span>
+				</a>
+			</nav>	
+			<!-- 评论底部结束 -->
+			<div class="mui-content">
+				
+				<div class="detail-carousel">
+				 	<div class="swiper-container detail-banner-carousel">
+				        <div class="swiper-wrapper" id="productFigureBox">
+				           <!--  <div class="swiper-slide"><img src="./static/images/lb.jpg" data-preview-src="" data-preview-group="1" alt=""></div>
+				            <div class="swiper-slide"><img src="./static/images/lb.jpg" data-preview-src="" data-preview-group="1" alt=""></div>
+				            <div class="swiper-slide"><img src="./static/images/lb.jpg" data-preview-src="" data-preview-group="1" alt=""></div>
+				            <div class="swiper-slide"><img src="./static/images/lb.jpg" data-preview-src="" data-preview-group="1" alt=""></div> -->
+		    			</div>
+	    				<div class="swiper-pagination"></div>
+					</div>
+				</div>
+				
+				<div class="detail-infos">
+					<div class="detail-text-info" id="productParameterBox">
+						<!-- <p class="title">Bluewater Spirit - The premium water purifier</p>
+						<p class="price">¥ 450-600</p>
+						<p class="clearfix">
+							<span class="fl">Shipping: ¥ <em>5.00</em></span>
+							<span class="fr">Shanghai</span>
+						</p> -->
+					</div>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right" id="chooseColor">
+								Specifications
+							</a>
+						</li>
+						<!-- <li class="mui-table-view-cell">
+							<a id="commentbtn" href="./comment.html" class="mui-navigate-right">
+								Reviews（<em>0</em>）
+							</a>
+						</li> -->
+					</ul>
+					<!-- <div class="comment-box">
+						<div class="comment-box-list">
+							<p style="text-align: center;color: #f6442b;">None</p>
+							<p class="clearfix">
+							<img src="./static/images/help2_07.png" alt="" />
+							<span>miller</span>
+							</p>
+							<p>Comment Comment Comment Comment Comment Comment Comment CommentComment Comment Comment Comment Comment Comment Comment CommentComment Comment Comment Comment Comment Comment Comment CommentComment Comment Comment Comment Comment Comment Comment CommentComment Comment Comment Comment Comment Comment Comment CommentComment Comment Comment Comment Comment Comment Comment Comment</p>
+							<p class="more-comment-box">
+								<a href="./comment.html" id="readMore" class="more-comment">Read More</a>
+							</p>
+						</div>
+					</div> -->
+					<p class="Details-info-title">Details</p>
+				</div>
+				<div class="mui-content-padded product-detail-imgs" id="productInfo">
+					<!-- <p>
+						<img src="./static/images/details-img_01.png"/>
+					</p>
+					<p>
+						<img src="./static/images/details-img_02.png"/>
+					</p> -->
+				</div>
+			</div>
+		</div>
+		<!-- 商品banner轮播模板 -->
+		<script id="productCarousel" type="text/html">
+		    {{each productCarouselList as val}}
+		    	<div class="swiper-slide">
+		    		<img class="lazy" data-original="{{val}}" data-preview-src="{{val}}" data-preview-group="1" alt="">
+		    	</div>
+		    {{/each}}
+		</script>
+
+		<!-- 商品参数信息 -->
+		<script id="productParameter" type="text/html">
+	    	<p class="title">{{goods_name}}</p>
+	    	{{if min_sale_price}}
+			<p class="price">¥{{min_sale_price}}-{{max_sale_price}} <del>￥{{min_price}}-{{max_price}}</del></p>
+			{{else}}
+			<p class="price">￥{{min_price}}-{{max_price}}</p>
+			{{/if}}
+			<p class="clearfix" style="color: #666; font-size: 16px;">
+				* The product ships in Mainland China only, overseas parcel requests an extra shipping fee.
+			</p>
+		</script>
+		
+		<!-- 购物默认信息 -->
+		<script id="chooseTemplate" type="text/html">
+		    <span class="iconfont icon-guanbi" id="closeChoose"></span>
+			<div class="choose-info-imgtext clearfix" id="default">
+				<img id="CategoryPic" class="choose-info-img" src="{{price.goods_picture}}" alt="" data-preview-src="{{price.goods_picture}}" data-preview-group="2" />
+				<div class="choose-info-text" id="buyProductId" priceId= "{{price.price_id}}">
+					{{if price.goods_sale_price}}
+					<p>￥<em id="CategoryPrice">{{price.goods_sale_price}}</em></p>
+					{{else}}
+					<p>￥<em id="CategoryPrice">{{price.goods_price}}</em></p>
+					{{/if}}
+					<p>Stock: <em id="inStock">{{price.goods_stock}}</em></p>
+					<p><em>{{price.goods_type_one}}</em> <em>{{price.goods_type_two}}</em></p>
+				</div>
+			</div>
+			<div class="choose-box">
+				<div class="choose-classification">
+					<p>{{type_name_one}}</p>
+					<p class="product-class-list product-class-list1 clearfix">
+						{{each goods_type_one as value i}}
+							{{if value === price.goods_type_one}}
+							<span class="leixing active">{{value}}</span>
+							{{else}}
+							<span class="leixing">{{value}}</span>
+							{{/if}}
+						{{/each}}
+					</p>
+				</div> 
+				{{if type_name_two != ""}}
+				<div class="choose-classification">
+					<p>{{type_name_two}}</p>
+					<p class="product-class-list product-class-list2 clearfix">
+						{{each goods_type_two as value i}}
+							{{if value === price.goods_type_two}}
+							<span class="leixing active">{{value}}</span>
+							{{else}}
+							<span class="leixing">{{value}}</span>
+							{{/if}}
+						{{/each}}
+					</p>
+				</div>
+				{{/if}}
+			</div>
+		</script>
+
+		<!-- 更改信息 -->
+		<!-- 商品参数信息 -->
+		<script id="changeInfo" type="text/html">
+	    	<img id="CategoryPic" class="choose-info-img" src="{{goods_picture}}" alt="" data-preview-src="{{goods_picture}}" data-preview-group="2" />
+			<div class="choose-info-text" id="buyProductId" priceId= "{{price_id}}">
+				{{if goods_sale_price == ''}}
+				<p>￥<em id="CategoryPrice">{{goods_price}}</em></p>
+				{{else}}
+				<p>￥<em id="CategoryPrice">{{goods_sale_price}}</em></p>
+				{{/if}}
+				<p>Stock: <em id="inStock">{{goods_stock}}</em></p>
+				<p><em>{{goods_type_one}}</em> <em>{{goods_type_two}}</em></p>
+			</div>
+		</script>
+		<script src="./api/testOrFormal.js"></script>
+		<script src="./static/js/mui.min.js"></script>
+		<script src="./static/js/swiper.min.js"></script>
+		<script src="./static/js/mui.zoom.js"></script>
+		<script src="./static/js/mui.previewimage.js"></script>
+		<script src="./static/js/h.js"></script>
+		<script src="./static/js/jquery.min.js"></script>
+		<script src="./static/js/jquery.lazyload.min.js"></script>
+		<script src="./static/js/template.js"></script>
+		<script src="./api/productDetails.js"></script>
+	</body>
+
+</html>

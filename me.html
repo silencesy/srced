@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>personal info</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+        <!-- 字体图标 -->
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_y2nyratgm34n29.css">
+    </head>
+
+    <body>
+        <div class="layout personal-layout">
+            <nav class="mui-bar mui-bar-tab">
+                <a class="mui-tab-item" id="homePage">
+                    <span class="mui-icon iconfont icon-shanghu1"></span>
+                    <span class="mui-tab-label">Home</span>
+                </a>
+                <a class="mui-tab-item" id="carPage">
+                    <span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+                    <span class="mui-tab-label">Cart</span>
+                </a>
+                <a class="mui-tab-item mui-active" id="mePage">
+                    <span class="mui-icon iconfont icon-me"></span>
+                    <span class="mui-tab-label">Me</span>
+                </a>
+                <a class="mui-tab-item" id="morePage">
+                    <span class="mui-icon iconfont icon-iconfonthome"></span>
+                    <span class="mui-tab-label">More</span>
+                </a>
+            </nav>
+            <div class="mui-content">
+                <div class="personal-title clearfix" id="personalTitle">
+                    <img src="" height="41" width="41" alt="">
+                    <span class="name"></span>
+                    <a href="./personal-info.html"><span class="edit">Edit</span></a>
+                </div>
+                <div class="order-list-box">
+                    <div class="order-list" id="goOrders">
+                        <span>Order List</span>
+                        <span class="allbtn"><em>All</em><em class="mui-icon mui-icon-arrowright"></em></span>
+                    </div>
+                    <ul class="mui-table-view mui-grid-view mui-grid-9" id="statusbox">
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./orders.html?show=item2mobile">
+                                <span class="mui-icon iconfont icon-daifukuan"> <span class="mui-badge"></span></span>
+                                <div class="mui-media-body">Unpaid</div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./orders.html?show=item3mobile">
+                                <span class="mui-icon iconfont icon-fahuo"><span class="mui-badge"></span></span>
+                                <div class="mui-media-body">Paid</div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./orders.html?show=item4mobile">
+                                <span class="mui-icon iconfont icon-daishouhuo"></span>
+                                <div class="mui-media-body">Delivered</div>
+                            </a>
+                        </li>
+                        <!-- <li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3">
+                            <a href="./orders.html?show=Reviews">
+                                <span class="mui-icon iconfont icon-pingjia-copy1"></span>
+                                <div class="mui-media-body">Reviews</div>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="other">
+                    <ul class="mui-table-view mui-grid-view mui-grid-9">
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./address.html">
+                                <span class="mui-icon iconfont icon-shouhuodizhi"></span>
+                                <div class="mui-media-body">Shipping Address</div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./favourite.html">
+                                <span class="mui-icon iconfont icon-shoucang"></span>
+                                <div class="mui-media-body">Wishlist</div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./invoice-list.html">
+                                <span class="mui-icon iconfont icon-fapiao"></span>
+                                <div class="mui-media-body">Invoice Info</div>
+                            </a>
+                        </li>
+                        <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                            <a href="./refund-info.html">
+                                <span class="mui-icon iconfont icon-tuikuan"></span>
+                                <div class="mui-media-body">Refund</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script id="AvatarTemplate" type="text/html">
+            {{if head_img != 0}}
+                <img src="{{head_img}}" height="41" width="41" alt="">
+                <span class="name">{{third_name}}</span>
+                <a href="./personal-info.html"><span class="edit">Edit</span></a>
+            {{else}}
+                <img src="./static/images/Avatar.png" height="41" width="41" alt="">
+                <span class="name">{{third_name}}</span>
+                <a href="./personal-info.html"><span class="edit">Edit</span></a>
+            {{/if}}
+        </script>
+        <script id="statusTemplate" type="text/html">
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                <a href="./orders.html?show=item2mobile">
+                    <span class="mui-icon iconfont icon-daifukuan"> <span class="mui-badge"></span><span class="mui-badge">{{amount[0]}}</span></span>
+                    <div class="mui-media-body">Unpaid</div>
+                </a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                <a href="./orders.html?show=item3mobile">
+                    <span class="mui-icon iconfont icon-fahuo"><span class="mui-badge"></span><span class="mui-badge">{{amount[1]}}</span></span>
+                    <div class="mui-media-body">Paid</div>
+                </a>
+            </li>
+            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+                <a href="./orders.html?show=item4mobile">
+                    <span class="mui-icon iconfont icon-daishouhuo"><span class="mui-badge">{{amount[2]}}</span></span>
+                    <div class="mui-media-body">Delivered</div>
+                </a>
+            </li>
+        </script>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/jquery.min.js"></script>
+        <script src="./static/js/template.js"></script>
+        <script src="./api/isLogin.js"></script>
+        <script src="./api/me.js"></script>
+    </body>
+</html>

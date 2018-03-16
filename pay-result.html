@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Order-confirm</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_493593_17fvegvu6w7y14i.css">
+	<style type="text/css">
+		#list {
+			/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+			margin-top: -1px;
+		}
+		#addrmask {
+			max-width: 640px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: -1000%;
+			margin: auto;
+			/*background-color: red;*/
+			z-index: 100;
+	    	transition: all 0.4s;
+    		-webkit-transition: all 0.2s;
+    		overflow-y:scroll;
+            -webkit-overflow-scrolling : touch; /* ios 自带滚动条不平滑解决方法 */
+    		overflow: auto;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="layout">
+		<!-- <header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">order-confirm</h1>
+		</header> -->
+		<div id="addrmask">
+			
+		</div>
+		<div class="mui-content pay-result">			
+			<div class="order-addr" id="infoBox">
+				<!-- <div class="select-address order-con" >
+					<div class="order-add">
+						<p>Amanda</p>
+						<p>1365374988</p>
+						<span>Room 305-306,Building 2,No.169 MengZi Rode,Shanghai</span>
+					</div>
+					<img src="./static/images/letter.jpg" alt="" class="letter">
+				</div>
+				<ul class="pay-result-ul">
+					<p>Total: <em>¥ 46</em></p>
+					<div class="clearfix">
+						<li class="mui-pull-left">
+							<a href="orders.html?show=item2mobile">Order List</a>
+						</li>
+						<li class="mui-pull-left">
+							<a href="home-page.html">Home</a>
+						</li>					
+					</div>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+	<script id='payresulttemplate' type='text/html'>
+		{{if success == 1}}
+		<div class="select-address order-con" >
+			<div class="order-add">
+				<p>{{fullname}}</p>
+				<p>{{phone}}</p>
+				{{if region}}
+				<span>{{region}} {{region_detail}}</span>
+				{{else}}
+				<span>{{email}}</span>
+				{{/if}}
+			</div>
+			<img src="./static/images/letter.jpg" alt="" class="letter">
+		</div>
+		<ul class="pay-result-ul">
+			<p style="color: #fb442b;">Successful</p>
+			<div class="clearfix">
+				<li class="mui-pull-left">
+					<a href="orders.html?show=item3mobile">Order List</a>
+				</li>
+				<li class="mui-pull-left">
+					<a href="index.html">Home</a>
+				</li>					
+			</div>
+		</ul>
+		{{else}}
+		<div class="select-address order-con" >
+			<div class="order-add">
+				<p>{{fullname}}</p>
+				<p>{{phone}}</p>
+				{{if region}}
+				<span>{{region}} {{region_detail}}</span>
+				{{else}}
+				<span>{{email}}</span>
+				{{/if}}
+			</div>
+			<img src="./static/images/letter.jpg" alt="" class="letter">
+		</div>
+		<ul class="pay-result-ul">
+			<p>Total: <em>¥ {{total}}</em></p>
+			<div class="clearfix">
+				<li class="mui-pull-left">
+					<a href="orders.html?show=item2mobile">Order List</a>
+				</li>
+				<li class="mui-pull-left">
+					<a href="index.html">Home</a>
+				</li>					
+			</div>
+		</ul>
+		{{/if}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script>
+		$(function(){
+			getinfo ();
+			function getinfo () {
+				var token = window.localStorage.getItem('token');
+				var orderid = getQueryString("orderid");
+				var success = getQueryString("success") || 0;
+				$.ajax({
+					beforeSend: function(request) {
+		                request.setRequestHeader("TOKEN", token);
+		            },
+					url: csOrzs + '/Api/Order/getOrderInfo',
+					type: 'POST',
+					data: {order_id: orderid},
+				})
+				.done(function(data) {
+					console.log(data);
+					if (data.code == 1) {
+						var infodata = data.data;
+						infodata.success = success;
+						var infoHtml = template('payresulttemplate', infodata);
+						$('#infoBox').html(infoHtml);
+					} else {
+						mui.toast("Network error, please try again!");
+					}
+				})
+				.fail(function() {
+					mui.toast("Network error, please try again!");
+				});
+				
+			}
+			// 获取地址栏参数
+		    function getQueryString(name) {
+		        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		            var r = window.location.search.substr(1).match(reg);
+		        if (r != null) {
+		            return unescape(r[2]);
+		        }
+		            return null;
+		    }
+		});
+	</script>
+</body>
+</html>

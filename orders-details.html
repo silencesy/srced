@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>orders-details</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+        <!-- 字体图标 -->
+        <link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xr4p95ezbeqgds4i.css">
+        <style>
+            .orders-list .clearfix:not(:first-child) {
+                padding-top: 0;
+            }
+            .refund {
+                background-color: #fff;
+                padding-bottom: 10px;
+                margin-top: -5px;
+            }
+            .refundbtn {
+                border: 1px solid #f6442b;
+                color: #f6442b;
+                margin-right: 15px;
+                padding: 0 20px;
+                height: 30px;
+                line-height: 30px;
+                float: right;
+                border-radius: 20px;
+                font-size: 12px;
+                cursor: pointer;
+            }
+            .text-info p:nth-child(2) {
+                color: #ccc;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="layout personal-layout orders-layout">
+            <div class="mui-content">
+                <ul class="mui-table-view orders-details-content">
+                    <li class="mui-table-view-cell">
+                        <span class="mui-icon iconfont icon-xinxi"></span>
+                        Notice
+                        <span class="mui-icon iconfont icon-kefu"></span>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        If you have any after-sale requests, please contact the customer services within 7 days from the date you received the parcel, late request will not be accepted, thank you.
+                    </li>
+                    <!-- <li class="mui-table-view-cell">
+                        <span class="mui-icon iconfont icon-shouhuodizhi"></span>快递已签收
+                        <p class="time">2017-11-12 12:14:00</p>
+                    </li> -->
+                    <li class="mui-table-view-cell" id="addrinfo">
+                        <!-- <span class="mui-icon iconfont icon-dizhi2"></span>Name: AmandBao
+                        <p>Address: Room 305 Qinzhou Building,NO.6,Lane 108,Qinzhou Road,Xuhui District,Shanghai</p> -->
+                    </li>
+                </ul>
+                <div class="orders-content orders-details-content" id="probox">
+                    <!-- <div class="orders-list">
+                        <div class="title">
+                            Bluewater <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
+                        <div class="product-info clearfix">
+                            <div class="clearfix">
+                                <img src="./static/images/ordersimg.jpg" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>Shanghai Restaurant Review: Kun Thai</p>
+                                        <p>Specifications: Blue</p>
+                                        
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ 299</p>
+                                        <del>¥ 382</del>
+                                        <p>x 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <img src="./static/images/ordersimg.jpg" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>Shanghai Restaurant Review: Kun Thai</p>
+                                        <p>Specifications: Blue</p>
+                                        
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ 299</p>
+                                        <del>¥ 382</del>
+                                        <p>x 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <img src="./static/images/ordersimg.jpg" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>Shanghai Restaurant Review: Kun Thai</p>
+                                        <p>Specifications: Blue</p>
+                                        <p>Size: L</p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ 299</p>
+                                        <del>¥ 382</del>
+                                        <p>x 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix">
+                                <p>Total: ¥ <span>304.00</span> (Shipping:¥<span>5.00</span>)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orders-list">
+                        <div class="title">
+                            Bluewater <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
+                        <div class="product-info clearfix">
+                            <div class="clearfix">
+                                <img src="./static/images/ordersimg.jpg" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>Shanghai Restaurant Review: Kun Thai</p>
+                                        <p>Specifications: Blue</p>
+                                        <p>Size: L</p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ 299</p>
+                                        <del>¥ 382</del>
+                                        <p>x 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix">
+                                <p>Total: ¥ <span>304.00</span> (Shipping:¥<span>5.00</span>)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orders-list">
+                        <div class="title">
+                            Bluewater <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
+                        <div class="product-info clearfix">
+                            <div class="clearfix">
+                                <img src="./static/images/ordersimg.jpg" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>Shanghai Restaurant Review: Kun Thai</p>
+                                        <p>Specifications: Blue</p>
+                                        <p>Size: L</p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ 299</p>
+                                        <del>¥ 382</del>
+                                        <p>x 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix">
+                                <p>Total: ¥ <span>304.00</span> (Shipping:¥<span>5.00</span>)</p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="refund clearfix hide" id="refundBtn">
+                    <a href="#" class="refundbtn">Refund</a>
+                </div> -->
+                <div class="refund clearfix hide" id="payBtn">
+                    <a href="#" class="refundbtn">Pay</a>
+                </div>
+                <div class="orders-details-info" id="bottombox">
+                    <!-- <p class="one hide">Order Number: {{order_number}}<em></em><span class="copy copybtn" data-clipboard-text="{{order_number}}">Copy</span></p>
+                    <p class="two hide">Payment Time: {{payment_time}}</p>
+                    <p class="three hide">Delivery Time:  {{delivered_time}}</p> -->
+                </div>
+            </div>
+        </div>
+        <script id='addrtemplate' type='text/html'>
+            <span class="mui-icon iconfont icon-dizhi2"></span>Name: {{fullname}}
+            <p>Phone: {{phone}}</p>
+            <p>Address: {{region}} {{region_detail}}</p>
+        </script>
+        <script id='emailtemplate' type='text/html'>
+            <span class="mui-icon iconfont icon-dizhi2"></span>{{email}}
+        </script>
+        <script id='producttemplate' type='text/html'>
+            {{each prolist.merchant as val index}}
+                {{if prolist.merchant.length == 1}}
+                    <div class="orders-list" style="margin-bottom: 0;padding-bottom: 0;">
+                        <div class="title">
+                            {{val.merchant_name}} <span class="mui-icon mui-icon-arrowright"></span>
+                        </div>
+                        <div class="product-info clearfix">
+                            {{each val.list as value i}}
+                            {{if value.status == 3}}
+                            <div class="clearfix" style="padding-bottom: 0;">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix" style="padding-top: 0px; padding-bottom: 10px; background-color: #f2f2f2;">
+                                <p></p>
+                                <p><span flagid="{{value.id}}" class="gorunfundbtn">Refund</span></a></p>
+                            </div>
+                            {{else}}
+                            <div class="clearfix">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/each}}
+                            <div class="pro-bottom-info clearfix" style="padding-top: 10px; padding-bottom: 10px;">
+                                <p>Total: ¥ <span>{{prolist.total}}</span> ( Shipping:¥<span> 0.00 </span> )</p>
+                            </div>
+                        </div>
+                    </div>
+                {{else}}
+                    {{if index == 0}}
+                        <div class="orders-list" style="margin-bottom: 0;padding-bottom: 0;">
+                            <div class="title">
+                                {{val.merchant_name}} <span class="mui-icon mui-icon-arrowright"></span>
+                            </div>
+                            <div class="product-info clearfix">
+                                {{each val.list as value i}}
+                            {{if value.status == 3}}
+                            <div class="clearfix" style="padding-bottom: 0;">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix" style="padding-top: 0px; padding-bottom: 10px; background-color: #f2f2f2;">
+                                <p></p>
+                                <p><span flagid="{{value.id}}" class="gorunfundbtn">Refund</span></a></p>
+                            </div>
+                            {{else}}
+                            <div class="clearfix">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/each}}
+                            </div>
+                        </div>
+                    {{else if prolist.merchant.length == (index+1)}}
+                        <div class="orders-list" style="margin-bottom: 0;padding-bottom: 0;">
+                            <div class="title">
+                                {{val.merchant_name}} <span class="mui-icon mui-icon-arrowright"></span>
+                            </div>
+                            <div class="product-info clearfix">
+                                {{each val.list as value i}}
+                            {{if value.status == 3}}
+                            <div class="clearfix" style="padding-bottom: 0;">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix" style="padding-top: 0px; padding-bottom: 10px; background-color: #f2f2f2;">
+                                <p></p>
+                                <p><span flagid="{{value.id}}" class="gorunfundbtn">Refund</span></a></p>
+                            </div>
+                            {{else}}
+                            <div class="clearfix">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/each}}
+                                <div class="pro-bottom-info clearfix" style="padding-top: 10px; padding-bottom: 10px;">
+                                    <p>Total: ¥ <span>{{prolist.total}}</span> ( Shipping:¥<span> 0.00 </span> )</p>
+                                </div>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="orders-list" style="margin-bottom: 0;padding-bottom: 0;">
+                            <div class="title">
+                                {{val.merchant_name}} <span class="mui-icon mui-icon-arrowright"></span>
+                            </div>
+                            <div class="product-info clearfix">
+                                {{each val.list as value i}}
+                            {{if value.status == 3}}
+                            <div class="clearfix" style="padding-bottom: 0;">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pro-bottom-info clearfix" style="padding-top: 0px; padding-bottom: 10px; background-color: #f2f2f2;">
+                                <p></p>
+                                <p><span flagid="{{value.id}}" class="gorunfundbtn">Refund</span></a></p>
+                            </div>
+                            {{else}}
+                            <div class="clearfix">
+                                <img src="{{value.goods_picture}}" alt="">
+                                <div class="pro-det-info clearfix">
+                                    <div class="text-info">
+                                        <p>{{value.goods_name}}</p>
+                                        <p>
+                                            {{each value.type as v k}}
+                                                {{v}}:{{k}}
+                                            {{/each}}
+                                        </p>
+                                    </div>
+                                    <div class="number-info">
+                                        <p>¥ {{value.goods_sale_price}}</p>
+                                        <del>¥ {{value.goods_price}}</del>
+                                        <p>x {{value.goods_cnt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                            {{/each}}
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}} 
+            {{/each}}
+        </script>
+        <script id='bottomtemplate' type='text/html'>
+            <p class="one">Order Number: {{order_number}}<em></em><span class="copy copybtn" data-clipboard-text="{{order_number}}">Copy</span></p>
+            <p class="two">Payment Time: {{payment_time}}</p>
+            <p class="three">Delivery Time:  {{delivered_time}}</p>
+        </script>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/template.js"></script>
+        <script src="./static/js/jquery.min.js"></script>
+        <script src="./static/js/clipboard.min.js"></script>
+        <script src="./api/ordersDetails.js"></script>
+    </body>
+</html>

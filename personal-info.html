@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>personal info2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/mui.picker.all.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+    </head>
+
+    <body>
+        <div class="layout me-layout">
+            <header id="header" class="mui-bar mui-bar-nav">
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+                <h1 class="mui-title">Personal Info</h1>
+            </header>
+            <!-- 弹出框开始 -->
+            <div class="info-popup">
+                <div class="info-popup-inner">
+                    <div class="info-popup-title">Change the password</div>
+                    <div class="info-popup-input">
+                        <input type="text" id="pas1" placeholder="Current password" name="" value="">
+                        <input type="text" id="pas2" placeholder="New password" name="" value="">
+                    </div>   
+                </div>
+                <div class="info-popup-buttons">
+                    <span class="info-popup-button" id="info-cancel">Cancel</span>
+                    <span class="info-popup-button" id="info-done">Done</span>
+                </div>
+            </div>
+            <div class="info-popup-backdrop" ></div>
+            <!-- 弹出框结束 -->
+
+            <div class="mui-content me-content" id="userInfoBox">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right mui-right-picture" href="javascript:;">
+                            <span>Profile Picture</span>
+                            <img id='showImg' src="#" alt="">
+                        </a>
+                        <div id="">
+                            <form id="camera" enctype="multipart/form-data" class="camera">
+                                <input type="file" name="file" accept="image/*" class="imgForm">
+                            </form>
+                        </div>
+                    </li>
+                    <li class="mui-table-view-cell" id="editName">
+                        <a class="mui-right-name">
+                            <span>Name</span>
+                            <i id="userName"></i>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a class="mui-navigate-right mui-right-gender" id="clickUserPicker">
+                            <span>Gender</span>
+                            <i id="showUserPicker"></i>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell" id="emailBtn">
+                        <a class="mui-navigate-right mui-right-gender" id="clickUserPicker">
+                            <span>Email</span>
+                            <i id="emailText"></i>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell" id="resetPassword">
+                        <a class="mui-navigate-right mui-right-gender">
+                            <span>Reset password</span>
+                            <i id=""></i>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <button id="loyout" class="me-logout">Logout</button>
+                <!-- 弹出选择照片开始 -->
+                <div id="picture" class="mui-popover mui-popover-action mui-popover-bottom">
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">
+                            <a href="#">Photo</a>
+                            <div id="" >
+                                <form id="camera" enctype="multipart/form-data">
+                                    <input id="nedfile" type="file" name="file" accept="image/*" class="imgForm">
+                                </form>
+                            </div>
+                        </li>
+                        <li class="mui-table-view-cell">
+                            <a href="#">Library</a>
+                        </li>
+                    </ul>
+                    <ul class="mui-table-view">
+                        <li class="mui-table-view-cell">
+                            <a href="#picture"><b>Cancel</b></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 弹出选择照片结束 -->
+
+            </div>
+        </div>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/mui.picker.min.js"></script>
+        <script src="./static/js/jquery.min.js"></script>
+        <script src="./api/personalInfo.js"></script>
+    </body>
+</html>

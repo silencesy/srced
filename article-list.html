@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Articles</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="./static/css/mui.min.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+        <style>
+           
+            .mui-bar~.mui-content .mui-fullscreen {
+                top: 44px;
+                height: auto;
+            }
+            .mui-pull-top-tips {
+                position: absolute;
+                top: -20px;
+                left: 50%;
+                margin-left: -25px;
+                width: 40px;
+                height: 40px;
+                border-radius: 100%;
+                z-index: 1;
+            }
+            .mui-bar~.mui-pull-top-tips {
+                top: 24px;
+            }
+            .mui-pull-top-wrapper {
+                width: 42px;
+                height: 42px;
+                display: block;
+                text-align: center;
+                background-color: #efeff4;
+                border: 1px solid #ddd;
+                border-radius: 25px;
+                background-clip: padding-box;
+                box-shadow: 0 4px 10px #bbb;
+                overflow: hidden;
+            }
+            .mui-pull-top-tips.mui-transitioning {
+                -webkit-transition-duration: 200ms;
+                transition-duration: 200ms;
+            }
+            .mui-pull-top-tips .mui-pull-loading {
+                /*-webkit-backface-visibility: hidden;
+                -webkit-transition-duration: 400ms;
+                transition-duration: 400ms;*/
+                
+                margin: 0;
+            }
+            .mui-pull-top-wrapper .mui-icon,
+            .mui-pull-top-wrapper .mui-spinner {
+                margin-top: 7px;
+            }
+            .mui-pull-top-wrapper .mui-icon.mui-reverse {
+                /*-webkit-transform: rotate(180deg) translateZ(0);*/
+            }
+            .mui-pull-bottom-tips {
+                text-align: center;
+                background-color: #efeff4;
+                font-size: 15px;
+                line-height: 40px;
+                color: #777;
+            }
+            .mui-pull-top-canvas {
+                overflow: hidden;
+                background-color: #fafafa;
+                border-radius: 40px;
+                box-shadow: 0 4px 10px #bbb;
+                width: 40px;
+                height: 40px;
+                margin: 0 auto;
+            }
+            .mui-pull-top-canvas canvas {
+                width: 40px;
+            }
+            .mui-slider-indicator.mui-segmented-control {
+                background-color: #fff;
+            }
+            .orders-content .product-info img {
+                width: 40% !important;
+                height: auto !important;
+                float: left !important;
+            }
+            .mui-table-view {
+                background-color: #E8E8E8; d q
+            }
+            .orders-list .clearfix:not(:first-child) {
+                padding-top: 0;
+            }
+            .mui-pull-bottom-tips {
+                background-color: #E8E8E8;
+            }
+            .orders-content .product-info img {
+                width: 32%!important;
+            }
+            .orders-content .product-info .pro-det-info {
+                width: 68%!important;
+            }
+            .mui-fullscreen {
+                position: fixed;
+            }
+            .orders-layout .mui-content {
+                 padding-top: 0px; 
+            }
+
+            .mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+                border-bottom: none;
+            }
+            #sliderSegmentedControl .mui-control-item.mui-active {
+                border-bottom: 1px solid #f6442b;
+            }
+            .mui-segmented-control .mui-control-item {
+                line-height: 39px;
+            }
+            .mui-table-view-cell {
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="layout orders-layout">
+            <div class="mui-content ">
+                <div id="slider" class="mui-slider mui-fullscreen">
+                    <div id="sliderSegmentedControl" class=" mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                            <a class="mui-control-item mui-active" href="#item1mobile">
+                                Product
+                            </a>
+                            <a class="mui-control-item" href="#item2mobile">
+                                Ticketing
+                            </a>
+                            <a class="mui-control-item" href="#item3mobile">
+                                Coupons
+                            </a>
+                           <!--  <a class="mui-control-item" href="#item4mobile">
+                                Delivered
+                            </a> -->
+                    </div>
+                    <div class="mui-slider-group  orders-content-top" id="bigbox">
+                        <div id="item1mobile" class="mui-slider-item orders-content mui-control-content mui-active">
+                            <div class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <div class="data-list home-pick-list mui-table-view home-pick-list" id="one">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="item2mobile" class="mui-slider-item orders-content mui-slider-item mui-control-content">
+                            <div class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <div class="data-list home-pick-list mui-table-view" id="two">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="item3mobile" class="mui-slider-item orders-content mui-slider-item mui-control-content">
+                            <div class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <div class="data-list home-pick-list mui-table-view" id="three">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div id="item4mobile" class="mui-slider-item orders-content mui-slider-item mui-control-content">
+                            <div class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <div class="data-list home-pick-list mui-table-view" id="four">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 分类标题 -->
+        <script id="articelsTitle" type="text/html">
+            {{each articelsTitleList as val index}}
+                {{if index == 0}}
+                <a class="mui-tab-item mui-active" href="#minirefresh{{index}}">
+                    <span class="mui-tab-label">{{val.name}}</span>
+                </a>
+                {{else}}
+                <a class="mui-tab-item" href="#minirefresh{{index}}">
+                    <span class="mui-tab-label">{{val.name}}</span>
+                </a>
+                {{/if}}
+            {{/each}}
+        </script>
+        <!-- 文章列表模板 -->
+        <script id="articels" type="text/html">
+            {{each articelsList as val}}
+                <a href="article-details.html?articlesid={{val.id}}">
+                    <li class="mui-table-view-cell">
+                        <div class="home-pick-img">
+                            <img src="{{val.coverpic}}" alt="">
+                        </div>
+                        <div class="home-pick-info">
+                            <p>{{val.article_name}}</p>
+                            <em class="date">{{val.create_time}}</em>
+                        </div>
+                    </li>
+                </a>
+            {{/each}}
+        </script>
+        <script src="./api/testOrFormal.js"></script>
+        <script src="./static/js/jquery.min.js"></script>
+        <script src="./static/js/template.js"></script>
+        <script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/mui.pullToRefresh.js"></script>
+        <script src="./static/js/mui.pullToRefresh.material.js"></script>
+        <script>
+            
+            (function(mui) {
+
+                mui.init({
+                    swipeBack: false
+                });
+
+                //阻尼系数
+                var showIndex;
+                var page0 = 0;
+                var page1 = 0;
+                var page2 = 0;
+                var page3 = 0;
+                mui('.mui-scroll-wrapper').scroll({
+                    indicators: true //是否显示滚动条
+                });
+                mui.ready(function() {
+                    //循环初始化所有下拉刷新，上拉加载。
+                    mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+                        mui(pullRefreshEl).pullToRefresh({
+                            up: {
+                                auto:true,
+                                contentrefresh : "Loading…",
+                                contentdown: 'Pull up to load more',
+                                contentnomore:'No more data',
+                                callback: function() {
+                                    var self = this;
+                                    if (index == 0) {
+                                        createFragment0 (index,self)
+                                    }
+                                    if (index == 1) {
+                                        createFragment1 (index,self)
+                                    }
+                                    if (index == 2) {
+                                        createFragment2 (index,self)
+                                    }
+                                    if (index == 3) {
+                                        createFragment3 (index,self)
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    function createFragment0 (index,self) {
+                        page0++;
+                        $.ajax({
+                            url: csOrzs + '/Api/Article/getList',
+                            type: 'GET',
+                            data: {
+                                'cat_id': index+1,
+                                'pageSize': 8,
+                                'p': page0
+                            },
+                        })
+                        .done(function(data) {
+                            console.log(data);
+                            var articleListData = data.data.articles;
+                            var totalPages = data.data.totalPages;
+                            var articelsList2 = {"articelsList":articleListData};
+                            var articleListHtml = template('articels', articelsList2);
+                            $('#one').append(articleListHtml);
+                            self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        });
+                        
+                    
+                        
+                    }
+                    function createFragment1 (index,self) {
+                        page1++;
+                        $.ajax({
+                            url: csOrzs + '/Api/Article/getList',
+                            type: 'GET',
+                            data: {
+                                'cat_id': index+1,
+                                'pageSize': 8,
+                                'p': page0
+                            },
+                        })
+                        .done(function(data) {
+                            console.log(data);
+                            var articleListData = data.data.articles;
+                            var totalPages = data.data.totalPages;
+                            var articelsList2 = {"articelsList":articleListData};
+                            var articleListHtml = template('articels', articelsList2);
+                            $('#two').append(articleListHtml);
+                            self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        });
+                        
+                    };
+                    function createFragment2 (index,self) {
+                        page2++;
+                        $.ajax({
+                            url: csOrzs + '/Api/Article/getList',
+                            type: 'GET',
+                            data: {
+                                'cat_id': index+1,
+                                'pageSize': 8,
+                                'p': page0
+                            },
+                        })
+                        .done(function(data) {
+                            console.log(data);
+                            var articleListData = data.data.articles;
+                            var totalPages = data.data.totalPages;
+                            var articelsList2 = {"articelsList":articleListData};
+                            var articleListHtml = template('articels', articelsList2);
+                            $('#three').append(articleListHtml);
+                            self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        });
+                        
+                    };
+                    function createFragment3 (index,self) {
+                        page3++;
+                        $.ajax({
+                            url: csOrzs + '/Api/Article/getList',
+                            type: 'GET',
+                            data: {
+                                'cat_id': index+1,
+                                'pageSize': 8,
+                                'p': page0
+                            },
+                        })
+                        .done(function(data) {
+                            console.log(data);
+                            var articleListData = data.data.articles;
+                            var totalPages = data.data.totalPages;
+                            var articelsList2 = {"articelsList":articleListData};
+                            var articleListHtml = template('articels', articelsList2);
+                            $('#four').append(articleListHtml);
+                            self.endPullUpToRefresh(totalPages == page0 || totalPages == 0);
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        });
+                        
+                    };
+                });
+                
+                
+            })(mui);
+        </script>
+    </body>
+
+</html>

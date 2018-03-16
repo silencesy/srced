@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>product-list</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<style>
+		.activesave {
+			color: #f6442b !important;
+		}
+	</style>
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_b86z5o3kc56zuxr.css">
+</head>
+<body>
+	<div class="layout search-result-layout">
+
+		<header id="header" class="mui-bar mui-bar-nav search-all-header">
+			<div class="mui-bar-top" id="shopmainMenuBar">
+				<a id="shopHomePage" class="shop-nav" href="#">
+					<span class="mui-tab-label ">Home</span>
+				</a>
+				<span class="shop-line"></span>
+				<a id="shopAllPage" class="shop-nav" href="#" flag='null'>
+					<span class="mui-tab-label">All Categories</span>
+				</a>
+				<span class="shop-line"></span>
+				<a id="shopNewPage" class="shop-nav" href="#" flag='20'>
+					<span class="mui-tab-label">New Arrivals</span>
+				</a>
+				<!-- <span class="shop-line"></span>
+				<a class="shop-nav" href="">
+					<span class="mui-tab-label">Category</span>
+				</a> -->
+			</div>
+			<div class="search-rank product-list" style="top: 44px;">
+				<div class="sales-box">
+					<span class="rank-sales">Sales</span>
+					
+				</div>
+				<div class="price-box">
+					<span class="rank-price">Price</span>
+					<div class="rank-jiantou2">
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy-copy"></span>
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy"></span>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="productBox">
+			<div class="wrapper-result mui-scroll">
+				<ul class="wall wall-content" id="listdata" style="margin-top: 40px;">
+					<!-- <li class="waterfall">
+						<a href="./cart-empty.html">
+							<img class="lazy" src="./static/images/yashilandai.jpg" />
+							<p>Shanghai Restaurant Review: Kun Thai Shanghai Restaurant Review: Kun Thai</p>
+							<span class="water-left">￥<span class="postage-number">113928</span></span>
+							<span class="iconfont icon-gouwuche water-right"></span>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+		</div>	
+	</div>
+	<script id="categorys" type="text/html">
+	    {{each categorysList as val}}
+	    	<li class="waterfall">
+					<a href="product-detail.html?productid={{val.id}}">
+						<img class="lazy" src="{{val.coverpic}}" />
+						<p>{{val.goods_name}}</p>
+					</a>
+					<p class="sales-count">Sales volume : {{val.sale_count}}</p>
+					{{if val.goods_sale_price}}
+					<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
+					{{else}}
+					<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
+					{{/if}}
+					<!-- <span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span> -->
+				</li>
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/masonry.pkgd.min.js"></script>
+	<script src="./static/js/imagesloaded.pkgd.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	
+	<script>
+		(function(mui) {
+			var shopId = getQueryString("merchantsid") || 1;
+			var sort;
+			var newarrival_count;
+			shopSrc ('#shopHomePage','./shopOwner-home.html',shopId,'');
+		    // shopSrc ('#shopAllPage','./template/shop-product-list.html',shopId,'&flag=1');
+    		// shopSrc ('#shopNewPage','./template/shop-product-list.html',shopId,'&flag=2');
+		    
+		    // $('body').on('click', 'a', function(event) {
+		    // 	// window.location.href = $(this).attr("href");
+		    // 	console.log($(this).attr("href"));
+		    // });
+		    // $('#listdata').on('click', 'a', function(event) {
+		    // 	console.log($(this).attr("href"));
+		    // });
+
+		    $('#shopmainMenuBar > a').on('click',function() {
+		    	$('.rank-jiantou2 > span').removeClass('activesave');
+		    	$('.search-rank.product-list > div > span').removeClass('activesave');
+		    	$('#shopmainMenuBar > a > span').each(function(index, el) {
+		    		$(this).removeClass('tab-actice-color');
+		    	});
+		    	$(this).children('span').addClass('tab-actice-color');
+		    	page = 0;
+		    	sort = null;
+		    	newarrival_count = $(this).attr('flag');
+		    	console.log(newarrival_count);
+		    	$('.waterfall').each(function(index, el) {
+	                $grid.masonry( 'remove', $(this)).masonry('layout');;
+	            });
+	            mui('#productBox').pullRefresh().refresh(true);
+	            mui('#productBox').pullRefresh().pullupLoading();
+	            mui('#productBox').pullRefresh().scrollTo(1, 1, 100);
+		    })
+
+		    tabColor();
+		    function tabColor() {
+		    	var flag = getQueryString('flag');
+		    	if (flag == 1) {
+		    		$('#shopAllPage > span').addClass('tab-actice-color');
+		    	} else if (flag == 2) {
+		    		$('#shopNewPage > span').addClass('tab-actice-color');
+		    		newarrival_count = $('#shopNewPage').attr('flag');
+		    	}
+		    }
+
+			function shopSrc (element,src,id,flag) {
+		        $(element).attr("href", src +'?merchantsid='+ id + flag);
+		    }
+			var $grid = $('.wall-content').masonry({
+				  // columnWidth: 10,
+				  itemSelector: '.waterfall',
+				  percentPosition: true
+				});
+
+			var categoryid =  getQueryString('categoryid') || 1;
+	 		// 初始化页码
+            var page = 0;
+            // 价格排序
+            mui('body').on('tap','.price-box',function(){
+            	$('.search-rank.product-list > div > span').removeClass('activesave');
+            	$(this).children('.rank-price').addClass('activesave');
+		        if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == false && $('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == false) {
+		        	console.log(1);
+		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+		            sort = 2;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#productBox').pullRefresh().refresh(true);
+		            mui('#productBox').pullRefresh().pullupLoading();
+		            mui('#productBox').pullRefresh().scrollTo(1, 1, 100);
+		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy').hasClass('activesave') == true) {
+		        	console.log(2);
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            $('.icon-xiangshangjiantou-copy-copy-copy-copy').addClass('activesave');
+		            sort = 1;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#productBox').pullRefresh().refresh(true);
+		            mui('#productBox').pullRefresh().pullupLoading();
+		            mui('#productBox').pullRefresh().scrollTo(1, 1, 100);
+		        } else if ($('.icon-xiangshangjiantou-copy-copy-copy-copy').hasClass('activesave') == true) {
+		        	console.log(3);
+		            $('.rank-jiantou2 > span').each(function(index, el) {
+		                $(this).removeClass('activesave');
+		            });
+		            $('.icon-xiangshangjiantou-copy-copy-copy').addClass('activesave');
+		            sort = 2;
+		            page = 0;
+		            $('.waterfall').each(function(index, el) {
+		                $grid.masonry( 'remove', $(this)).masonry('layout');;
+		            });
+		            mui('#productBox').pullRefresh().refresh(true);
+		            mui('#productBox').pullRefresh().pullupLoading();
+		            mui('#productBox').pullRefresh().scrollTo(1, 1, 100);
+		        }
+		    });
+		    // 销量排序
+		    mui('body').on('tap','.sales-box',function(){
+		    	$('.search-rank.product-list > div > span').removeClass('activesave');
+		    	$(this).children('.rank-sales').addClass('activesave');
+		    	$('.rank-jiantou2 > span').each(function(index, el) {
+	                $(this).removeClass('activesave');
+	            });
+		    	sort = 3;
+	            page = 0;
+	            $('.waterfall').each(function(index, el) {
+	                $grid.masonry( 'remove', $(this)).masonry('layout');;
+	            });
+	            mui('#productBox').pullRefresh().refresh(true);
+	            mui('#productBox').pullRefresh().pullupLoading();
+	            mui('#productBox').pullRefresh().scrollTo(1, 1, 100);
+		    });
+           	mui.init({
+					pullRefresh: {
+						container: '#productBox',
+						up: {
+							auto:true,
+							contentrefresh : "Loading…",
+							callback: pullupRefresh
+						}
+					}
+				});
+				function pullupRefresh() {
+					console.log(sort);
+					++page;
+					$.ajax({
+						url: csOrzs + '/Api/Archive/getList',
+						type: 'GET',
+						data: {
+		                        
+		                        'p': page,
+		                        'pageSize': '8',
+		                        'sort': sort,
+		                        'merchant_id': shopId,
+		                        'newarrival_count': newarrival_count
+
+		                    },
+					})
+					.done(function(response) {
+						console.log(response)
+						if (response.code == 1) {
+							var categoryData = response;
+		                	var totalPages = categoryData.data.totalPages;
+		            		var dataList = categoryData.data.goods;
+							mui('#productBox').pullRefresh().endPullupToRefresh((page == totalPages || totalPages == 0));
+							// 固定写法
+							var categorysList2 = {"categorysList":dataList};
+							var categorysHtml = template('categorys', categorysList2);
+							// console.log(categorysHtml);
+			                var dataHtml = $(categorysHtml);
+						  	$grid.append( dataHtml ).masonry( 'appended', dataHtml );
+							$grid.imagesLoaded().progress( function() {
+						  		$grid.masonry();
+							});  
+							// mui('.mui-scroll-wrapper').pullRefresh().scrollTo(1, 1, 100);
+						} else {
+							mui('#productBox').pullRefresh().endPullupToRefresh(true);
+							mui.toast("Network error, please try again!");
+						}
+						
+					})
+					.fail(function() {
+						mui('#productBox').pullRefresh().endPullupToRefresh(true);
+						mui.toast("Network error, please try again!");
+					});
+				}
+           	// console.log($grid);
+            // miniRefresh 对象
+         //    var miniRefresh = new MiniRefresh({
+         //        container: '#minirefresh',
+         //        isUseBodyScroll: true,
+             	
+         //        down: {
+         //            isLock: true,
+         //            callback: function() {
+         //            }
+         //        },
+         //        up: {
+         //            isAuto: true,
+         //            contentdown: 'Pull up to load more',
+	        //       	contentrefresh: 'Loading…',
+	        //       	contentnomore: 'No more data',
+         //            callback: function() {
+         //                // 递增页码
+         //                page++;
+         //                $.ajax({
+		       //              // 请求网址
+		       //              url: 'http://proj7.thatsmags.com/Api/Archive/getList',
+		       //              type: 'GET',
+		       //              // 请求参数，一般会带上页码
+		       //              data: {
+		       //                  'p': page,
+		       //                  'pageSize': '8',
+		       //                  'merchant_id' : shopId
+		       //              },
+		       //              success: function(response) {
+		                    	
+		       //              	var categoryData = response;
+		       //              	var totalPages = categoryData.data.totalPages;
+		       //              	var dataList = categoryData.data.goods;
+		       //              	console.log(response);
+		       //              	// page++;
+		       //                  if (response.code == 1) {
+									// var categorysList2 = {"categorysList":dataList};
+									// var categorysHtml = template('categorys', categorysList2);
+		       //                      var dataHtml = $(categorysHtml);
+								 //  	$grid.append( dataHtml ).masonry( 'appended', dataHtml );
+
+									// $grid.imagesLoaded().progress( function() {
+								 //  		$grid.masonry();
+									// });  
+									// imgLazyLoad();
+									// // imgLazyLoad();
+		       //                      // 是否已取完数据页
+		       //                      if (totalPages == page || totalPages == 0) {
+		       //                          miniRefresh.endUpLoading(true);
+		       //                      } else {
+		       //                          miniRefresh.endUpLoading(false);
+		       //                      }
+		                            
+		       //                  } else {
+		       //                      miniRefresh.endUpLoading(true);
+		       //                  }
+		       //              },
+		       //              error: function() {
+		       //                  miniRefresh.endUpLoading(true);
+		       //              }
+		       //          });
+         //            }
+         //        }
+         //    });
+
+			function imgLazyLoad() {
+				$("img.lazy").lazyload({ 
+					effect : "fadeIn",
+					placeholder: "http://api.mall.thatsmags.com/Public/ckfinder/images/grey.jpg"
+				}); 
+			}
+
+            function getQueryString(name) {
+				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+					var r = window.location.search.substr(1).match(reg);
+				if (r != null) {
+					return unescape(r[2]);
+				}
+					return null;
+			}
+		})(mui);
+	</script>
+</body>
+</html>

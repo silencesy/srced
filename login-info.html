@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ThatsMart</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<style>
+/*		#wechat-bind {
+			display: none;
+		}
+		#mobile-bind {
+			display: none;
+		}*/
+	</style>
+</head>
+<body>
+	<div class="layout home-layout" >
+<!-- 		<div class="start-buy">
+			<p><span class="iconfont icon-duihao"></span>Start Shopping</p>
+			<a href="" id="done">Done</a>	
+		</div> -->
+		<div class="home-mask wechat-mask">
+			<div class="logo-img">
+				<i class="logo-svg"></i>
+			</div>
+			<div class="home-mask-form">
+				<p>Please complete the imformation</p>
+				<div id="wechat-bind">
+<!-- 					<div class="login-phonenumber">
+						<input id="phoneNumber" type="text" placeholder="Enter phone number">
+						<button id="getCode" type="button" class="mui-btn">Send Code</button>
+					</div>
+					<div class="login-code">
+						<input id="code" type="text" placeholder="Enter verification code " />
+					</div> -->
+					<div class="login-email">
+						<input id="emailtext1" type="text" placeholder="Email address" />
+					</div>
+					<div class="login-name">
+						<input id="name" type="text" placeholder="Username " />
+					</div>
+					<div class="login-password">
+						<input id="password" type="text" placeholder="Password " />
+					</div>		
+					<div class="login-btn">
+						<button type="button" id="loginBtn" class="mui-btn">Submit</button>
+					</div>
+				</div>
+<!-- 				<div id="mobile-bind">
+					<div class="login-email">
+						<input id="emailtext" type="text" placeholder="Email address" />
+					</div>
+					<div class="login-btn">
+						<button type="button" id="loginBtn2" class="mui-btn">Submit</button>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./api/isbind.js"></script>
+</body>
+</html>

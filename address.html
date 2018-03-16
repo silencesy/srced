@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>address list</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_xr4p95ezbeqgds4i.css">
+	<style>
+		.data-list {
+		    position: relative;
+		    margin-top: 0;
+		    margin-bottom: 0;
+		    padding-left: 0;
+		    list-style: none;
+		}
+
+		.minirefresh-scroll {
+			    background-color: #e5e5e5;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout comments-page-layout layout-addrlist">
+		<div class="mui-content mui-scroll-wrapper invoice-wrap" id="pullrefresh">
+			<div class="mui-scroll">
+				<div class="data-list" id="listdata">
+					<!-- <div class="add-list">
+						<p>Amanda</p>
+						<p>1365374988</p>
+						<p>Room 305-306,Building 2,No.169 MengZi Rode,Shanghai</p>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>Default address</label>
+							<input name="checkbox1" value="Item 1" type="radio">
+						</div>
+						<div class="edit-addr">
+					  		<span class="edit"><em class="mui-icon iconfont icon-bianji"></em>Edit</span>
+					  		<span class="delete"><em class="icon-shanchu mui-icon iconfont"></em>Delete</span>
+					  	</div>
+					</div> -->
+					
+				</div>
+			</div>
+		</div>
+		<a href="./add-address.html" class="comments-btn address-btn">Add a new address</a>
+	</div>
+
+	<script id='addrTemplate' type="text/html">
+		{{each addrList as val index}}
+			<div class="add-list">
+				<p>{{val.fullname}}</p>
+				<p>{{val.phone}}</p>
+				<p>{{val.region}}{{val.region_detail}}</p>
+				<div class="mui-input-row mui-radio mui-left">
+					<label>Default address</label>
+					{{if val.is_default == 1}}
+					<input name="checkbox1" addrid = {{val.id}} value="Item 1" checked="checked" type="radio">
+					{{else}}
+					<input name="checkbox1" addrid = {{val.id}} value="Item 1" type="radio">
+					{{/if}}	
+				</div>
+				<div class="edit-addr">
+			  		<span class="edit" addrid = {{val.id}}><em class="mui-icon iconfont icon-bianji"></em>Edit</span>
+			  		<span class="delete" addrid = {{val.id}}><em class="icon-shanchu mui-icon iconfont"></em>Delete</span>
+			  	</div>
+			</div>
+		{{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./api/address.js"></script>
+</body>
+</html>

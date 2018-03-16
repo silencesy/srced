@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Order Confirmation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+	<style type="text/css">
+		#list {
+			/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+			margin-top: -1px;
+		}
+	</style>
+</head>
+<body>
+	<div class="layout">
+<!-- 		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Order Confirmation</h1>
+		</header> -->
+		<div class="mui-content content-confirmation">
+			<div class="select-address order-con">
+				<a href="#" class="mui-navigate-right">
+					<p>Select shopping address</p>
+				</a>
+				<img src="./static/images/letter.jpg" alt="" class="letter">
+			</div>
+			<ul class="mui-table-view home-pick-list order-list">
+				<a href="article-details.html">
+					<li class="mui-table-view-cell">
+						<div class="home-pick-img">
+							<img src="./static/images/home-product1.jpg" alt="">
+						</div>
+						<div class="home-pick-info order-confirm-info">
+							<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+							<em class="price">￥100</em><em class="number">x1</em>
+						</div>
+					</li>
+					<div class="postage-packing">
+						<span class="post-left">Postage&Packing</span>
+						<span class="post-right">￥<span class="postage-number">5.00</span></span>
+					</div>
+				</a>
+				<a href="article-details.html">
+					<li class="mui-table-view-cell">
+						<div class="home-pick-img">
+							<img src="./static/images/home-product1.jpg" alt="">
+						</div>
+						<div class="home-pick-info order-confirm-info">
+							<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+							<em class="price">￥100</em><em class="number">x1</em>
+						</div>
+					</li>
+					<div class="postage-packing">
+						<span class="post-left">Postage&Packing</span>
+						<span class="post-right">￥<span class="postage-number">5.00</span></span>
+					</div>
+				</a>
+				<a href="article-details.html">
+					<li class="mui-table-view-cell">
+						<div class="home-pick-img">
+							<img src="./static/images/home-product1.jpg" alt="">
+						</div>
+						<div class="home-pick-info order-confirm-info">
+							<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+							<em class="price">￥100</em><em class="number">x1</em>
+						</div>
+					</li>
+					<div class="postage-packing">
+						<span class="post-left">Postage&Packing</span>
+						<span class="post-right">￥<span class="postage-number">5.00</span></span>
+					</div>
+				</a>
+				<a href="article-details.html">
+					<li class="mui-table-view-cell">
+						<div class="home-pick-img">
+							<img src="./static/images/home-product1.jpg" alt="">
+						</div>
+						<div class="home-pick-info order-confirm-info">
+							<p>itemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitemitemitemitmitemitemitem</p>
+							<em class="price">￥100</em><em class="number">x1</em>
+						</div>
+					</li>
+					<div class="postage-packing">
+						<span class="post-left">Postage&Packing</span>
+						<span class="post-right">￥<span class="postage-number">5.00</span></span>
+					</div>
+				</a>
+			</ul>
+			<footer class="footer-order">
+				<div class="total">Total:￥<span class="sumNumber"></span></div>
+				<div class="submit">Submit</div>
+			</footer>		
+		</div>
+	</div>	
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./api/orderConfirmation.js"></script>
+</body>
+</html>

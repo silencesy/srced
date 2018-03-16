@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>That's Mart</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./static/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="./static/css/minirefresh.css">
+		<link rel="stylesheet" href="./static/css/style.css">
+	</head>
+	<body>
+		<div class="layout orders-layout">
+			<nav class="mui-bar mui-bar-tab" id="articelsTitleBox">
+				<!-- <a class="mui-tab-item mui-active" href="#all">
+					<span class="mui-tab-label">All</span>
+				</a> -->
+			</nav>
+			<div class="mui-content orders-content orders-content-top">
+				<div id="minirefresh0" class="mui-control-content minirefresh-wrap mui-active">
+					<div class="minirefresh-scroll">
+                        <div class="data-list home-pick-list mui-table-view" id="listdata0">
+                            
+                        </div>
+                    </div>
+				</div>
+				<div id="minirefresh1" class="mui-control-content minirefresh-wrap">
+                    <div class="minirefresh-scroll">
+                        <div class="data-list home-pick-list mui-table-view" id="listdata1">
+                            
+                        </div>
+                    </div>
+				</div>
+				<div id="minirefresh2" class="mui-control-content minirefresh-wrap">
+                    <div class="minirefresh-scroll">
+                        <div class="data-list home-pick-list mui-table-view" id="listdata2">
+                            
+                        </div>
+                    </div>
+					
+				
+				</div>
+				<div id="minirefresh3" class="mui-control-content minirefresh-wrap">
+                    <div class="minirefresh-scroll">
+                        <div class="data-list home-pick-list mui-table-view" id="listdata3">
+                            
+                        </div>
+                    </div>
+				</div>
+				
+			</div>
+		</div>
+        <!-- 分类标题 -->
+        <script id="articelsTitle" type="text/html">
+            {{each articelsTitleList as val index}}
+                {{if index == 0}}
+                <a class="mui-tab-item mui-active" href="#minirefresh{{index}}">
+					<span class="mui-tab-label">{{val.name}}</span>
+				</a>
+                {{else}}
+                <a class="mui-tab-item" href="#minirefresh{{index}}">
+					<span class="mui-tab-label">{{val.name}}</span>
+				</a>
+                {{/if}}
+            {{/each}}
+        </script>
+        <!-- 文章列表模板 -->
+        <script id="articels" type="text/html">
+            {{each articelsList as val}}
+                <a href="article-details.html?articlesid={{val.id}}">
+                    <li class="mui-table-view-cell">
+                        <div class="home-pick-img">
+                            <img src="{{val.coverpic}}" alt="">
+                        </div>
+                        <div class="home-pick-info">
+                            <p>{{val.article_name}}</p>
+                            <em class="date">{{val.create_time}}</em>
+                        </div>
+                    </li>
+                </a>
+            {{/each}}
+        </script>
+        <script src="./api/testOrFormal.js"></script>
+		<script src="./static/js/mui.min.js"></script>
+        <script src="./static/js/template.js"></script>
+		<script src="./static/js/jquery.min.js"></script>
+		<script src="./static/js/minirefresh.js"></script>
+		<script src="./api/articleList.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>More</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_py0uecagdjrcz0k9.css">
+</head>
+<body>
+	<div class="layout home-layout" id="app">
+		<nav class="mui-bar mui-bar-tab">
+				<a class="mui-tab-item" id="homePage">
+					<span class="mui-icon iconfont icon-shanghu1"></span>
+					<span class="mui-tab-label">Home</span>
+				</a>
+				<a class="mui-tab-item" id="carPage">
+					<span class="mui-icon iconfont icon-gouwuche"><span class="mui-badge"></span></span>
+					<span class="mui-tab-label">Cart</span>
+				</a>
+				<a class="mui-tab-item" id="mePage">
+					<span class="mui-icon iconfont icon-me"></span>
+					<span class="mui-tab-label">Me</span>
+				</a>
+				<a class="mui-tab-item mui-active" id="morePage">
+					<span class="mui-icon iconfont icon-iconfonthome"></span>
+					<span class="mui-tab-label">More</span>
+				</a>
+			</nav>
+		<div class="mui-content">
+			<div id="More" class="mui-control-content mui-active">
+				<div class="more-page">
+					
+					
+				</div>	
+			</div>
+		</div>
+	</div>
+	<script id='imgTemplate' type='text/html'>
+		{{each imglist as val index}}
+			<div class="clearfix">
+				<a href="{{val.set_url}}"><img class="lazy" data-original="{{val.set_img}}" alt=""></a>
+			</div>
+		{{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./api/isLogin.js"></script>
+	<script src="./api/more.js"></script>
+</body>
+</html>

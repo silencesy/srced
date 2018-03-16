@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>shopOwner-home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/swiper.min.css" />
+	<link rel="stylesheet" href="./static/css/style.css">
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_mdngvvut94ml5wmi.css">
+</head>
+<body>	
+	<div class="layout layout-shop-owner">
+		<div class="shop-header">
+			<div class="shop-header-left">
+				<img id="shopLogo" src="#" alt="">
+				<span id="shopName"></span>
+			</div>
+			<div class="shop-header-right">
+				<a href="./index.html">
+					<span class="iconfont icon-shanghu1 shopgohome"></span>
+				</a>
+				<span class="iconfont icon-shoucang"></span>
+				<a href="./shop-search.html" id="goshopsearch">
+					<span class="iconfont icon-sousuo"></span>
+				</a>	
+			</div>
+		</div>
+		<!-- 头部置顶导航开始 -->		
+		<div id="mainMenuBarAnchor"></div>
+		<div class="mui-bar-top" id="mainMenuBar">
+			<a id="shopHomePage" class="shop-nav" href="#">
+				<span class="mui-tab-label tab-actice-color">Home</span>
+			</a>
+			<span class="shop-line"></span>
+			<a id="shopAllPage" class="shop-nav" href="">
+				<span class="mui-tab-label">All Categories</span>
+			</a>
+			<span class="shop-line"></span>
+			<a id="shopNewPage" class="shop-nav" href="">
+				<span class="mui-tab-label">New Arrivals</span>
+			</a>
+			<!-- <span class="shop-line"></span>
+			<a class="mui-tab-item shop-nav" href="">
+				<span class="mui-tab-label">Category</span>
+			</a> -->
+		</div>
+		<!-- 头部置顶导航结束 -->
+
+		<!-- 底部nav开始 -->
+		<div class="shop-bottom-banner">
+			<a id="shopCategory" href="#">
+				<div class="col-6">
+					<span class="mui-tab-label">Category</span>
+				</div>
+			</a>
+			<span class="shop-line"></span>
+			<div class="col-6" onclick="qimoChatClick();">
+				<span class="iconfont icon-kefu"></span>
+				<span class="mui-tab-label" >Live Chat</span>
+			</div>
+		</div>	
+		<!-- 底部nav结束 -->
+		
+		<div class="mui-content">			
+			<!-- 轮播开始 -->
+			<div class="home-carousel shop-carousel">
+			 	<div class="swiper-container home-banner-carousel">
+			        <div class="swiper-wrapper" id="shopBannerBox">
+			            <!-- <div class="swiper-slide"><a href="#"><img src="./static/images/shop-lunbo1.jpg" alt=""></a></div>
+			            <div class="swiper-slide"><a href="#"><img src="./static/images/shop-lunbo1.jpg" alt=""></a></div>
+			            <div class="swiper-slide"><a href="#"><img src="./static/images/shop-lunbo1.jpg" alt=""></a></div>
+			            <div class="swiper-slide"><a href="#"><img src="./static/images/shop-lunbo1.jpg" alt=""></a></div> -->
+		    		</div>
+	    		<div class="swiper-pagination"></div>
+			</div>
+			<!-- 轮播结束 -->
+			<!-- <div class="shop-section-head">
+				<div class="section-head-title">Featured shops</div>
+			</div> -->
+			<div class="shop-products clearfix" id="productBox">
+				<!-- <a href="">
+					<img src="./static/images/shop-content_01.jpg" alt="">
+				</a>
+				<a href="">
+					<img src="./static/images/shop-content_02.jpg" alt="">
+				</a>
+				<a href="">
+					<img src="./static/images/shop-content_03.jpg" alt="">
+				</a> -->
+
+			</div>
+		</div>
+	</div>
+	<!-- 商户轮播图 -->
+	<script id="shopBanner" type="text/html">
+	    {{each shopBannerList as val}}
+	    	<div class="swiper-slide">
+	    		<a href="product-detail.html?productid={{val.set_id}}">
+	    			<img class="lazy" data-original="{{val.set_img}}" alt="">
+	    		</a>
+	    	</div>
+	    {{/each}}
+	</script>
+
+	<!-- 商户商品列表 -->
+	<script id="shopProducts" type="text/html">
+	    {{each shopProductsList as val}}
+	    	{{if val.set_cat_id == 1}}
+	    	<a href="product-detail.html?productid={{val.set_id}}">
+				<img class="lazy" data-original="{{val.set_img}}" alt="">
+			</a>
+			{{else if val.set_cat_id == 2}}
+			<a href="{{val.set_url}}">
+				<img class="lazy" data-original="{{val.set_img}}" alt="">
+			</a>
+			{{else}}
+			<a>
+				<img class="lazy" data-original="{{val.set_img}}" alt="">
+			</a>
+			{{/if}}
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>	
+	<script src="./static/js/jquery.min.js"></script>	
+	<script src="./static/js/jquery.lazyload.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./static/js/swiper.min.js"></script>
+	<script src="./api/shopOwner.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>More</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<style>
+		body {
+			background-color: rgba(0,0,0,0.7);
+		}
+		.arrowimg {
+			zoom: 0.5;
+			position: fixed;
+			top: 10%;
+			right: 8%;
+		}
+		.info {
+			color: #fff;
+			position: fixed;
+			top: 40%;
+			left: 0;
+			padding: 0 5%;
+			font-size: 18px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<img class="arrowimg" src="./static/images/arrow.png" height="185" width="207" alt="">
+	<p class="info">
+		Please click the top right button to open the page in browser and process the payment
+	</p>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script>
+		var orderid = getUrlParam('orderid');
+		var trade_no2 = getUrlParam('trade_no2');
+		isWeiXin();
+		function isWeiXin(){
+		//window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+			var ua = window.navigator.userAgent.toLowerCase();
+			//通过正则表达式匹配ua中是否含有MicroMessenger字符串
+			if (ua.match(/MicroMessenger/i) == 'micromessenger'){
+				return true;
+			} else {
+				window.location.href = csOrzs + '/Api/Alipay/alipayapi?orderid=' + orderid;
+			}	
+		}
+		setInterval(function() {
+			$.ajax({
+				url: csOrzs + "/Api/Alipay/orderQuery",
+				type: 'POST',
+				data: {'WIDout_trade_no': trade_no2},
+			})
+			.done(function(data) {
+				if (data.code == 1) { //订单状态为1表示支付成功
+				  	window.location.href = './pay-result.html?orderid=' + orderid + '&success=1'; //页面跳转
+	            } 
+			})
+			.fail(function() {
+				mui.toast("Network error, please try again!");
+			});
+
+		}, 1000);  
+		function getUrlParam(key){
+	        // 获取参数
+	        var url = window.location.search;
+	        // 正则筛选地址栏
+	        var reg = new RegExp("(^|&)"+ key +"=([^&]*)(&|$)");
+	        // 匹配目标参数
+	        var result = url.substr(1).match(reg);
+	        //返回参数值
+	        return result ? decodeURIComponent(result[2]) : null;
+	    }
+	</script>
+</body>
+</html>

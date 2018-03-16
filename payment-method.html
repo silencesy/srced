@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Order Confirmation</title>
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+	<div class="layout">
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="pay-back"></a>
+			<h1 class="mui-title">Details</h1>
+		</header>
+		<div class="mui-content">
+			<p class="pay-amount">Amount: <em id="tatol"></em></p>
+			<div class="pay-box clearfix">
+				<span class="alipay"></span>
+				<span class="wechatpay"></span>
+			</div>
+		</div>
+	</div>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script>
+		(function(mui) {
+			var orderid = getQueryString("orderid");
+			var token = window.localStorage.getItem('token');
+			var jsApiParameters = GetRequest();
+			var trade_no = getQueryString("trade_no");
+			var trade_no2 = '';
+			delete jsApiParameters.orderid;
+			delete jsApiParameters.trade_no;
+			var flagflag = jsApiParameters.package.replace('id','id=');
+			jsApiParameters['package'] = flagflag;
+			$.ajax({
+				beforeSend: function(request) {
+	                request.setRequestHeader("TOKEN", token);
+	            },
+				url: csOrzs + '/Api/Order/getTotal',
+				type: 'POST',
+				data: {
+						order_id: orderid
+					},
+			})
+			.done(function(data) {
+				console.log(data);
+				
+				if (data.code == 1) {
+					trade_no2 = data.data.trade_no
+					window.localStorage.setItem('token',data.data.token);
+					$('#tatol').html('￥'+data.data.total);
+				}
+			})
+			.fail(function() {
+				mui.toast("Network error, please try again!");
+			})
+
+
+
+			// 弹出框
+		    var payBack = document.getElementById('pay-back');
+		    payBack.addEventListener('tap',function(){
+		        var btnArray = ['Yes', 'No'];
+		        mui.confirm('Are you sure to exit now?', ' ', btnArray, function(e) {
+		            if (e.index == 0) {
+		                window.location.href = './pay-result.html?orderid=' + orderid;
+		            }
+		        });
+		    });
+
+		    // 微信支付
+			$('.wechatpay').on('click',function() {
+				callpay();
+			})
+			// 支付宝支付
+			$('.alipay').on('click',function() {
+				window.location.href = './alipay.html?orderid=' + orderid + '&trade_no2=' + trade_no2;
+
+			});
+
+		
+			// 获取地址栏参数
+		    function getQueryString(name) {
+		        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		            var r = window.location.search.substr(1).match(reg);
+		        if (r != null) {
+		            return unescape(r[2]);
+		        }
+		            return null;
+		    }
+
+		    // 支付函数
+		    function jsApiCall() {
+				WeixinJSBridge.invoke(
+					'getBrandWCPayRequest',
+					jsApiParameters,
+					function(res){
+						// alert(res.err_code+res.err_desc+res.err_msg);
+						WeixinJSBridge.log(res.err_msg);
+					}
+				);
+			}
+			function callpay() {
+				if (typeof WeixinJSBridge == "undefined"){
+				    if( document.addEventListener ){
+				        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+				    }else if (document.attachEvent){
+				        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+				        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+				    }
+				}else{
+				    jsApiCall();
+				}
+			}
+			setInterval(function() {
+				$.ajax({
+					url: csOrzs + "/Api/Wx/orderQuery",
+					type: 'POST',
+					data: {trade_no: trade_no},
+				})
+				.done(function(data) {
+					if (data.code == 1) { //订单状态为1表示支付成功
+					  	window.location.href = './pay-result.html?orderid=' + orderid + '&success=1'; //页面跳转
+	                } 
+				})
+				.fail(function() {
+					mui.toast("Network error, please try again!");
+				});
+	
+			}, 1000);  
+			
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&");
+				for(var i = 0; i < strs.length; i ++) {
+					   		theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+						}
+				}
+					return theRequest;
+				}
+
+		})(mui);
+	</script>
+</body>
+</html>

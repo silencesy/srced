@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="./static/css/mui.min.css">
+	<link rel="stylesheet" href="./static/css/style.css">
+	<style>
+		.activesave {
+			color: #f6442b !important;
+		}
+	</style>
+	<!-- 字体图标 -->
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_259571_b86z5o3kc56zuxr.css">
+</head>
+<body>
+	<div class="layout search-result-layout">
+		<header id="header" class="mui-bar mui-bar-nav search-all-header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left shop-search-left"></a>
+			<div class="shop-search-input">
+				<form id="searchAllForm" onsubmit="return false;" action="##">
+					<input class="search-input" id="searchProduct" type="text" placeholder="Search"/>
+					<i class="iconfont icon-sousuo" id="searchBtn"></i>
+				</form>
+			</div>
+			<div class="search-rank">
+				<div class="sales-box">
+					<span class="rank-sales">Sales</span>
+<!-- 					<div class="rank-jiantou">
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy-copy jiantou1"></span>
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy jiantou2"></span>
+					</div> -->
+				</div>
+				<div class="price-box">
+					<span class="rank-price">Price</span>
+					<div class="rank-jiantou2">
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy-copy "></span>
+						<span class="iconfont icon-xiangshangjiantou-copy-copy-copy"></span>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="content">
+			<div class="mui-content search_mui-content mui-scroll-wrapper" id="pullrefresh">
+				<div class="wrapper-result mui-scroll">
+					<ul class="wall wall-content" id="listdata">
+					</ul>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<script id="categorys" type="text/html">
+	    {{each categorysList as val}}
+	    	<li class="waterfall">
+				<a href="product-detail.html?productid={{val.id}}">
+					<img class="lazy" src="{{val.coverpic}}" />
+					<p>{{val.goods_name}}</p>
+				</a>
+				<p class="sales-count">Sales volume : {{val.sale_count}}</p>
+				{{if val.goods_sale_price}}
+				<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
+				{{else}}
+				<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
+				{{/if}}	
+			</li>
+	    {{/each}}
+	</script>
+	<script src="./api/testOrFormal.js"></script>
+	<script src="./static/js/mui.min.js"></script>
+	<script src="./static/js/jquery.min.js"></script>
+	<script src="./static/js/masonry.pkgd.min.js"></script>
+	<script src="./static/js/imagesloaded.pkgd.min.js"></script>
+	<script src="./static/js/template.js"></script>
+	<script src="./api/searchAll.js"></script>
+	
+</body>
+</html>
