@@ -289,13 +289,14 @@
                     }
                     function createFragment1 (index,self) {
                         page1++;
+                        console.log(index+1);
                         $.ajax({
                             url: csOrzs + '/Api/Article/getList',
                             type: 'GET',
                             data: {
                                 'cat_id': index+1,
                                 'pageSize': 8,
-                                'p': page0
+                                'p': page1
                             },
                         })
                         .done(function(data) {
@@ -314,13 +315,14 @@
                     };
                     function createFragment2 (index,self) {
                         page2++;
+                        console.log(index+1);
                         $.ajax({
                             url: csOrzs + '/Api/Article/getList',
                             type: 'GET',
                             data: {
                                 'cat_id': index+1,
                                 'pageSize': 8,
-                                'p': page0
+                                'p': page2
                             },
                         })
                         .done(function(data) {
@@ -345,7 +347,7 @@
                             data: {
                                 'cat_id': index+1,
                                 'pageSize': 8,
-                                'p': page0
+                                'p': page3
                             },
                         })
                         .done(function(data) {

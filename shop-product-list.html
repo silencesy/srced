@@ -68,11 +68,12 @@
 	</div>
 	<script id="categorys" type="text/html">
 	    {{each categorysList as val}}
+	    	<a href="product-detail.html?productid={{val.id}}">
 	    	<li class="waterfall">
-					<a href="product-detail.html?productid={{val.id}}">
+					
 						<img class="lazy" src="{{val.coverpic}}" />
 						<p>{{val.goods_name}}</p>
-					</a>
+					
 					<p class="sales-count">Sales volume : {{val.sale_count}}</p>
 					{{if val.goods_sale_price}}
 					<span class="water-left">￥<span class="postage-number">{{val.goods_sale_price}}</span> <del>￥{{val.goods_price}}</del></span>
@@ -80,7 +81,8 @@
 					<span class="water-left">￥<span class="postage-number">{{val.goods_price}}</span></span>
 					{{/if}}
 					<!-- <span class="iconfont icon-gouwuche water-right" data_id = {{val.id}}></span> -->
-				</li>
+			</li>
+			</a>
 	    {{/each}}
 	</script>
 	<script src="./api/testOrFormal.js"></script>
@@ -99,15 +101,20 @@
 			shopSrc ('#shopHomePage','./shopOwner-home.html',shopId,'');
 		    // shopSrc ('#shopAllPage','./template/shop-product-list.html',shopId,'&flag=1');
     		// shopSrc ('#shopNewPage','./template/shop-product-list.html',shopId,'&flag=2');
-		    
+		    mui("body").on('tap', '#shopHomePage', function(event){
+				window.location.href = $(this).attr("href");
+			});
+			mui("#listdata").on('tap', 'a', function(event){
+				window.location.href = $(this).attr("href");
+			});
 		    // $('body').on('click', 'a', function(event) {
-		    // 	// window.location.href = $(this).attr("href");
-		    // 	console.log($(this).attr("href"));
+		    // 	window.location.href = $(this).attr("href");
+		    // 	// console.log($(this).attr("href"));
 		    // });
 		    // $('#listdata').on('click', 'a', function(event) {
 		    // 	console.log($(this).attr("href"));
 		    // });
-
+		    
 		    $('#shopmainMenuBar > a').on('click',function() {
 		    	$('.rank-jiantou2 > span').removeClass('activesave');
 		    	$('.search-rank.product-list > div > span').removeClass('activesave');

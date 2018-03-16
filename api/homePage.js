@@ -9,7 +9,7 @@
 		var countdown=60;
 		getAllDate ();
 		search();
-		
+		var isloop;
 		// 数据获取
 		function getAllDate () {
 			$.ajax({
@@ -23,6 +23,11 @@
 				if (data.code==1) {
 					// 首页轮播
 					var figures = homeData.data.figure;
+					if (figures.length == 1) {
+						isloop = false;
+					} else {
+						isloop = true;
+					}
 					var homeBannerList2 = {"homeBannerList":figures};
 					var homeBannerHtml = template('homeBanner', homeBannerList2);
 					$('#homeBannerbox').html(homeBannerHtml);
@@ -132,7 +137,7 @@
 		//首页第一个轮播
 	    function homeBannerFunction () {
 	    	var homeBannerCarousel = new Swiper('.home-banner-carousel',{
-				loop: true,
+				loop: isloop,
 				autoplay: 4000,
 				speed: 1000,
 				autoplayDisableOnInteraction: false,

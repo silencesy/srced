@@ -38,10 +38,11 @@
                 var shopProductsList2 = {"shopProductsList":contentArr};
                 var contentArrHtml = template('shopProducts', shopProductsList2);
                 $('#productBox').html(contentArrHtml);
+                imgLazyLoad();
                 var param = shopDetailsData.data.param;
                 var scriptInsert = "<script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId="+ param +"&autoShow=false&language=ZHCN' async='async'></script>";
                 $("body").append($(scriptInsert));
-                imgLazyLoad();
+                
             } else {
                 mui.toast("Network error, please try again!");
             }
@@ -61,7 +62,7 @@
     function imgLazyLoad() {
         $("img.lazy").lazyload({ 
             effect : "fadeIn",
-            threshold: 600,
+            threshold: 1500,
             placeholder: "http://api.mall.thatsmags.com/Public/ckfinder/images/grey.jpg"
         }); 
     }
