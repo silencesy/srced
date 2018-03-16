@@ -733,6 +733,10 @@ a {
 	color: #919191;
 }
 
+a:active {
+	color: #f6442b;
+}
+
 .mui-bar-tab~.mui-content {
 	background-color: #E8E8E8;
 }

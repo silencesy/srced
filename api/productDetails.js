@@ -216,6 +216,9 @@
 		var productsData = data;
 		console.log(productsData);
 		if (data.code==1) {
+			var param = productsData.data.param;
+            var scriptInsert = "<script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId="+ param +"&autoShow=false&language=ZHCN' async='async'></script>";
+            $("body").append($(scriptInsert));
 			$('title').text(data.data.goods_name);
 			// 轮播图
 			var productFigure = productsData.data.figure;

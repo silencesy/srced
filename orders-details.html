@@ -41,7 +41,7 @@
         <div class="layout personal-layout orders-layout">
             <div class="mui-content">
                 <ul class="mui-table-view orders-details-content">
-                    <li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell" onclick="qimoChatClick();">
                         <span class="mui-icon iconfont icon-xinxi"></span>
                         Notice
                         <span class="mui-icon iconfont icon-kefu"></span>
@@ -209,8 +209,13 @@
                                         
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
+                                        
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -232,8 +237,12 @@
                                         </p>
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -267,8 +276,12 @@
                                         
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -290,8 +303,12 @@
                                         </p>
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -321,8 +338,12 @@
                                         
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -344,8 +365,12 @@
                                         </p>
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -378,8 +403,12 @@
                                         
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
@@ -401,8 +430,12 @@
                                         </p>
                                     </div>
                                     <div class="number-info">
-                                        <p>¥ {{value.goods_sale_price}}</p>
-                                        <del>¥ {{value.goods_price}}</del>
+                                        {{if value.goods_sale_price}}
+                                            <p>¥ {{value.goods_sale_price}}</p>
+                                            <del>¥ {{value.goods_price}}</del>
+                                        {{else}}
+                                            <p>¥ {{value.goods_price}}</p>
+                                        {{/if}}
                                         <p>x {{value.goods_cnt}}</p>
                                     </div>
                                 </div>
