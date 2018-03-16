@@ -72,6 +72,8 @@
 			mui('body').on('tap','a',function(){document.location.href=this.href;});
 
 			var merchantCatId =  getQueryString('merchantCatId') || 1;
+			var name =  getQueryString('name');
+			$('title').text(name);
 			var $grid = $('.wall-content').masonry({
 				itemSelector: '.waterfall',
 				percentPosition: true

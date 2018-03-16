@@ -109,6 +109,8 @@
                         }
                         
                         
+                    } else if (data.code == 0) {
+                        mui.toast("Low stocks!");
                     } else {
                         mui.toast("Network error, please try again!");
                     }

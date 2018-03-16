@@ -58,7 +58,7 @@
 		<script id='categoryTemplate' type='text/html'>
 			{{each dataList as val index}}
 			<li class="mui-table-view-cell">
-				<a href="./shop-category-list.html?merchantCatId={{val.id}}" class="mui-navigate-right">
+				<a href="./shop-category-list.html?merchantCatId={{val.id}}&name={{val.name}}" class="mui-navigate-right">
 					{{val.name}}
 				</a>
 			</li>
