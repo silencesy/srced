@@ -1969,6 +1969,9 @@ a:active {
 /*商户首页结束*/
 
 /*商户搜索开始*/
+#searchShopForm #selfShopSearch {
+	margin: 2px;
+}
 .shop-search-content {
 	background-color: #fff !important;
 }
