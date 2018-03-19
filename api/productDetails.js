@@ -214,12 +214,13 @@
 	})
 	.done(function(data) {
 		var productsData = data;
-		console.log(productsData);
+		// console.log(productsData);
 		if (data.code==1) {
 			var param = productsData.data.param;
             var scriptInsert = "<script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId="+ param +"&autoShow=false&language=ZHCN' async='async'></script>";
             $("body").append($(scriptInsert));
 			$('title').text(data.data.goods_name);
+			
 			// 轮播图
 			var productFigure = productsData.data.figure;
 			var productCarouselList2 = {"productCarouselList":productFigure};
@@ -242,7 +243,10 @@
 			var productParameterData = productsData.data;
 			var productParameterHtml = template('productParameter', productParameterData);
 			$('#productParameterBox').html(productParameterHtml);
-
+			// console.log(productsData.data.eticket);
+			if(productsData.data.eticket != 1) {
+				$('.prompt-info').show();
+			}
 			imgLazyLoad();
 		} else {
 			mui.toast("Network error, please try again!");
@@ -386,6 +390,59 @@
 			// 
 		});
 	}
-	
+	wechatShare ();
+	// 微信分享
+	function wechatShare () {
+		$.ajax({
+			url: csOrzs + '/Api/Wx/wxShare',
+			type: 'POST',
+			data: {goods_id: productId},
+		})
+		.done(function(data) {
+			console.log(data);
+			share (data.data);
+		}).fail(function() {
+			mui.toast("Network error, please try again!");
+		});
+		
+	}
+
+	function share (data) {
+		console.log(typeof(data.signPackage.timestamp));
+		wx.config({
+		debug:false,// 是否开启调试模式
+		appId:data.signPackage.appId,// 必填，微信号AppID
+		timestamp:data.signPackage.timestamp,// 必填，生成签名的时间戳
+		nonceStr:data.signPackage.nonceStr,// 必填，生成签名的随机串
+		signature:data.signPackage.signature,// 必填，签名，见附录1
+		jsApiList:['onMenuShareTimeline',//分享到朋友圈
+		         'onMenuShareAppMessage',//分享给朋友
+		         'onMenuShareQQ'//分享到QQ
+		        ]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+		wx.ready(function(){
+			var url = window.location.href;
+			var options ={
+				title:data.res.title,// 分享标题
+				link:encodeURI(url),// 分享链接，记得使用绝对路径
+				imgUrl:encodeURI(data.res.imgUrl),// 分享图标，记得使用绝对路径
+				desc:data.res.desc,// 分享描述
+				success:function(){
+				  console.info('分享成功！'); 
+				  // 用户确认分享后执行的回调函数
+				},
+				cancel:function(){
+				  console.info('取消分享！');
+				  // 用户取消分享后执行的回调函数
+				}
+			}
+			wx.onMenuShareTimeline(options);// 分享到朋友圈
+			wx.onMenuShareAppMessage(options);// 分享给朋友
+			wx.onMenuShareQQ(options);// 分享到QQ
+			wx.error(function (res) {    
+	            alert("error: " + res.errMsg);    
+	        });
+        }); 
+	}
 	
 })(mui);

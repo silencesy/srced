@@ -4726,9 +4726,9 @@ p img {
 	.cart-layout .mui-bar.mui-bar-tab {
 		padding-bottom: 32px;
 	}
-	.detail-layout .choose-info {
-		bottom: 32px;
-	}
+	// .detail-layout .choose-info {
+	// 	bottom: 32px;
+	// }
 
 
 

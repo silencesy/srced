@@ -28,7 +28,7 @@
 			mui.toast("Please enter your password!");
 			return false;
 		} else if (!reg.test(password)) {
-			mui.toast("Please enter your password with 6-16 digits (must contain numbers and letters)!");
+			mui.toast("Please enter your password with 6-16 digits (must contain numbers and letters)!",{ duration:'long', type:'div' });
 			return false;
 		}
 		

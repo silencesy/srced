@@ -171,6 +171,9 @@
 				width: 100% !important;
 				height: auto !important;
 			}
+			.prompt-info {
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -323,18 +326,17 @@
 			<p class="price">¥{{min_sale_price}}-{{max_sale_price}} <del>￥{{min_price}}-{{max_price}}</del></p>
 			{{else}}
 			<p class="price">
-				{{if min_price == min_price}}
-				￥{{min_price}}
+				{{if max_price == min_price}}
+				￥{{max_price}}
 				{{else}}
-				￥{{min_price}}-{{min_price}}
+				￥{{min_price}}-{{max_price}}
 				{{/if}}
 			</p>
 			{{/if}}
-			<p class="clearfix" style="color: #666; font-size: 16px;">
+			<p class="clearfix prompt-info" style="color: #666; font-size: 16px;">
 				* The product ships in Mainland China only, overseas parcel requests an extra shipping fee.
 			</p>
 		</script>
-		
 		<!-- 购物默认信息 -->
 		<script id="chooseTemplate" type="text/html">
 		    <span class="iconfont icon-guanbi" id="closeChoose"></span>
@@ -404,6 +406,7 @@
 		<script src="./static/js/jquery.lazyload.min.js"></script>
 		<script src="./static/js/template.js"></script>
 		<script src="./api/productDetails.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	</body>
 
 </html>
