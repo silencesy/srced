@@ -190,38 +190,40 @@
         var pas1 = document.getElementById("pas1").value;
         var pas2 = document.getElementById("pas2").value;
         var reg = /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/g;
+        var token = localStorage.getItem("token");
         if(pas1 == '') {
             mui.toast("Please enter your original password!");
         }  else if (!reg.test($("#pas2").val())){
-            mui.toast("The new password with 6-16 digits (numbers and letters)!");
+            mui.toast("Please enter new password with 6-16 digits (numbers and letters)!",{ duration:'long', type:'div' });
             // $("#pas2").focus();
-        } else {
-            var token = localStorage.getItem("token");
-            $.ajax({
-                beforeSend: function(request) {
-                    request.setRequestHeader("TOKEN",token);
-                },
-                url: csOrzs + '/Api/Common/editUserInfo',
-                type: 'POST',
-                data: {'old_password': pas1,'password': pas2},
-            })
-            .done(function(data) {
-                if (data.code == 0) {
-                    mui.toast("The original password is incorrect!");
-                    return false;
-                } else if (data.code == 1) {
-                        mui.toast('Successfully!'); 
-                        $('.info-popup').hide();
-                        $('.info-popup-backdrop').hide();
-                    } else {
+        } 
+        // else {
+        
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("TOKEN",token);
+            },
+            url: csOrzs + '/Api/Common/editUserInfo',
+            type: 'POST',
+            data: {'old_password': pas1,'password': pas2},
+        })
+        .done(function(data) {
+            if (data.code == 0) {
+                mui.toast("The original password is incorrect!");
+                return false;
+            } else if (data.code == 1) {
+                    mui.toast('Successfully!'); 
+                    $('.info-popup').hide();
+                    $('.info-popup-backdrop').hide();
+                } else {
                     mui.toast("Network error, please try again!");
-                    }
-            })
-            .fail(function() {
-                mui.toast("Network error, please try again!");
-            })
+                }
+        })
+        .fail(function() {
+            mui.toast("Network error, please try again!");
+        })
           
-        }
+        // }
                
     });
 
